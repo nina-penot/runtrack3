@@ -2,17 +2,15 @@ function compareNumbers(a, b) {
     return a - b;
 }
 
+function compareNumbers2(a, b) {
+    return b - a;
+}
+
 function tri(numbers, order) {
     if (order == "asc") {
         return numbers.sort(compareNumbers);
     } else if (order == "desc") {
-        let sorted = numbers.sort(compareNumbers);
-        let sorted_len = sorted.length;
-        let new_arr = [];
-        for (n = sorted_len - 1; n >= 0; n--) {
-            new_arr.push(sorted[n]);
-        }
-        return new_arr;
+        return numbers.sort(compareNumbers2);
     }
 }
 
