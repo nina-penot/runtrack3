@@ -12,6 +12,47 @@ function toggle_my_elements(elemarray, mode) {
     }
 }
 
+/**
+ * Creates a header element
+ */
+function create_myheader() {
+    let myheader = document.createElement("header");
+    myheader.id = "myheader";
+    myheader.textContent = "Bienvenue!";
+    document.body.appendChild(myheader);
+}
+
+/**
+ * Removes created header
+ */
+function remove_myheader() {
+    //check if exists
+    myheader = document.getElementById("myheader")
+    if (myheader != null) {
+        myheader.remove();
+    }
+}
+
+/**
+ * Creates a main element
+ */
+function create_mymain() {
+    let mymain = document.createElement("main");
+    mymain.id = "mymain";
+    mymain.textContent = "🎉 Vous avez rentré le code, vous avez réussi! 🎉";
+    document.body.appendChild(mymain);
+}
+
+/**
+ * Creates a footer element
+ */
+function create_myfooter() {
+    let myfooter = document.createElement("footer");
+    myfooter.id = "myfooter";
+    myfooter.textContent = "🌈🌈YOUPI!!🌈🌈";
+    document.body.appendChild(myfooter);
+}
+
 //CODE -----------------------
 
 let down = "ArrowDown",
