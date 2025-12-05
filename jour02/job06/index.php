@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+
+<head></head>
+
+<body>
+
+</body>
+
+<script src="script.js"></script>
