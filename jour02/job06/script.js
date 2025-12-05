@@ -1,3 +1,19 @@
+//USEFUL FUNCTIONS -----------
+
+/**
+ * Toggle visibility of elements
+ * @param {*} elemarray The array of elements to toggle
+ * @param {*} mode The mode, must be either "block" or "none"
+ */
+function toggle_my_elements(elemarray, mode) {
+    for (i in elemarray) {
+        // console.log(elemarray[i]);
+        elemarray[i].style.display = mode;
+    }
+}
+
+//CODE -----------------------
+
 let down = "ArrowDown",
     up = "ArrowUp",
     right = "ArrowRight",
@@ -6,6 +22,13 @@ let down = "ArrowDown",
 let konamicode = [down, down, up, up, left, right, left, right, "b", "a"];
 let str_konamicode = konamicode.toString();
 let attempt = [];
+let header = document.querySelector("header"),
+    main = document.querySelector("main"),
+    footer = document.querySelector("footer");
+
+let myelements = [header, main, footer];
+
+toggle_my_elements(myelements, "none");
 
 document.addEventListener("keydown", function (e) {
 
@@ -19,10 +42,12 @@ document.addEventListener("keydown", function (e) {
         if (str_attempt == str_konamicode) {
             console.log("SUCCESS !!!!");
             //activate style
+            toggle_my_elements(myelements, "block");
             //press enter to reset
             if (e.key == "Enter") {
                 console.log("RESETTING...");
                 attempt = [];
+                toggle_my_elements(myelements, "none");
             }
         } else {
             console.log("Failed, try again.");

@@ -1,0 +1,20 @@
+header {
+    display: block;
+    background-color: rgb(21, 146, 255);
+    color: white;
+    font-size: 50px;
+}
+
+main {
+    display: block;
+    min-height: 400px;
+    font-size: 30px;
+    color: blue;
+}
+
+footer {
+    display: block;
+    background-color: rgb(96, 97, 101);
+    color: white;
+    font-size: 25px;
+}
