@@ -1,0 +1,1 @@
+//e.preventDefault() bloque le comportement lorsque gestion implicite de l'action
