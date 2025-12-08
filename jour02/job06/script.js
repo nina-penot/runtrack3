@@ -23,17 +23,6 @@ function create_myheader() {
 }
 
 /**
- * Removes created header
- */
-function remove_myheader() {
-    //check if exists
-    myheader = document.getElementById("myheader")
-    if (myheader != null) {
-        myheader.remove();
-    }
-}
-
-/**
  * Creates a main element
  */
 function create_mymain() {
@@ -49,8 +38,24 @@ function create_mymain() {
 function create_myfooter() {
     let myfooter = document.createElement("footer");
     myfooter.id = "myfooter";
-    myfooter.textContent = "🌈🌈YOUPI!!🌈🌈";
+    myfooter.textContent = "🌈🌈YOUPI!!🌈🌈(Pour reset, appuyez sur entré...)";
     document.body.appendChild(myfooter);
+}
+
+function create_adiv(id, content) {
+    let mydiv = document.createElement("div");
+    mydiv.id = id;
+    mydiv.textContent = content;
+    document.body.appendChild(mydiv);
+}
+
+/**
+ * Removes an element from the document according to the given id
+ * 
+ * @param {*} id The id of the element to remove
+ */
+function remove_myelement(id) {
+    document.getElementById(id).remove();
 }
 
 //CODE -----------------------
@@ -60,38 +65,72 @@ let down = "ArrowDown",
     right = "ArrowRight",
     left = "ArrowLeft";
 
-let konamicode = [down, down, up, up, left, right, left, right, "b", "a"];
+let ins_comp = {
+    "ArrowDown": "⬇️",
+    "ArrowUp": "⬆️",
+    "ArrowRight": "➡️",
+    "ArrowLeft": "⬅️"
+}
+
+let konamicode = [up, up, down, down, left, right, left, right, "b", "a"];
 let str_konamicode = konamicode.toString();
 let attempt = [];
-let header = document.querySelector("header"),
-    main = document.querySelector("main"),
-    footer = document.querySelector("footer");
+let code_filled = false;
+// let header = document.querySelector("header"),
+//     main = document.querySelector("main"),
+//     footer = document.querySelector("footer");
 
-let myelements = [header, main, footer];
+// let myelements = [header, main, footer];
 
-toggle_my_elements(myelements, "none");
+// toggle_my_elements(myelements, "none");
+
+create_adiv("insertion", "ENTREZ CODE KONAMI : ");
 
 document.addEventListener("keydown", function (e) {
 
     console.log(e.key);
     if (attempt.length < konamicode.length) {
+        let mydiv = document.getElementById("insertion");
+        if (document.getElementById("badcode") != null) {
+            remove_myelement("badcode");
+        }
         attempt.push(e.key);
         str_attempt = attempt.toString();
+        if (e.key in ins_comp) {
+            mydiv.textContent += ins_comp[e.key] + " ";
+        } else {
+            mydiv.textContent += e.key + " ";
+        }
     }
 
     if (attempt.length == konamicode.length) {
         if (str_attempt == str_konamicode) {
-            console.log("SUCCESS !!!!");
-            //activate style
-            toggle_my_elements(myelements, "block");
+            if (code_filled == false) {
+                console.log("SUCCESS !!!!");
+                //activate style
+                // toggle_my_elements(myelements, "block");
+                create_myheader();
+                create_mymain();
+                create_myfooter();
+                remove_myelement("insertion");
+                code_filled = true;
+            }
+
             //press enter to reset
             if (e.key == "Enter") {
                 console.log("RESETTING...");
                 attempt = [];
-                toggle_my_elements(myelements, "none");
+                // toggle_my_elements(myelements, "none");
+                remove_myelement("myheader");
+                remove_myelement("mymain");
+                remove_myelement("myfooter");
+                create_adiv("insertion", "ENTREZ CODE KONAMI : ")
+                code_filled = false;
             }
         } else {
             console.log("Failed, try again.");
+            create_adiv("badcode", "Mauvais code... :(")
+            document.getElementById("insertion").textContent = "ENTREZ CODE KONAMI : ";
             attempt = [];
         }
     }
