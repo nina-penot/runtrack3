@@ -1,5 +1,8 @@
 var keylogger = document.getElementById("keylogger");
 
-document.addEventListener('keydown', function (e) {
-    keylogger.value += e.key;
+window.addEventListener('keydown', function (e) {
+    e.preventDefault();
+    // keylogger.value += e.key;
+    keylogger.value = document.activeElement.id == "keylogger" ?
+        keylogger.value + e.key + e.key : keylogger.value + e.key;
 })
