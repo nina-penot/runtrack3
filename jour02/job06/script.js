@@ -5,12 +5,12 @@
  * @param {*} elemarray The array of elements to toggle
  * @param {*} mode The mode, must be either "block" or "none"
  */
-function toggle_my_elements(elemarray, mode) {
-    for (i in elemarray) {
-        // console.log(elemarray[i]);
-        elemarray[i].style.display = mode;
-    }
-}
+// function toggle_my_elements(elemarray, mode) {
+//     for (i in elemarray) {
+//         // console.log(elemarray[i]);
+//         elemarray[i].style.display = mode;
+//     }
+// }
 
 /**
  * Creates a header element
@@ -42,6 +42,11 @@ function create_myfooter() {
     document.body.appendChild(myfooter);
 }
 
+/**
+ * Creates a div with id as its id and content as its text content
+ * @param {*} id id to assign to the dic
+ * @param {*} content text content of the div
+ */
 function create_adiv(id, content) {
     let mydiv = document.createElement("div");
     mydiv.id = id;
