@@ -4,6 +4,9 @@ var myfooter = document.getElementById("foot"),
     st = 'scrollTop',
     sh = 'scrollHeight';
 
+//also possible to use :
+// const {scrollTop, clientHeight, scrollHeight} = document.documentElement
+
 // myfooter.addEventListener("scroll", function (e) {
 //     console.log("hey!!");
 // })
