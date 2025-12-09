@@ -1,0 +1,25 @@
+.box {
+    min-height: 200px;
+    min-width: 200px;
+    max-width: 50%;
+    background-color: rgb(205, 205, 205);
+    border: 5px solid grey;
+    overflow: hidden;
+}
+
+.slot {
+    min-width: 20px;
+    height: 100%;
+    background-color: pink;
+    border: 1px solid purple;
+}
+
+.float_left {
+    display: flex;
+    float: left;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
