@@ -1,14 +1,15 @@
 .box {
     min-height: 200px;
-    min-width: 200px;
+    /* min-width: 200px; */
+    width: 50%;
     max-width: 50%;
     background-color: rgb(205, 205, 205);
     border: 5px solid grey;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .slot {
-    min-width: 20px;
+    min-width: 50px;
     height: 100%;
     background-color: pink;
     border: 1px solid purple;
