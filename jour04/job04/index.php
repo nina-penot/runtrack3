@@ -8,7 +8,11 @@
 </head>
 
 <body>
+    <button id="mybutton">UPDATE</button>
 
+    <table id="mytable"></table>
+
+    <script src="./script.js"></script>
 </body>
 
 </html>

@@ -28,3 +28,8 @@ function fetch_all()
     $stmt->execute($params);
     return $stmt->fetchAll();
 }
+
+
+$mydata = fetch_all();
+$mydata = json_encode($mydata);
+echo $mydata;
