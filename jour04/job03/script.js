@@ -116,7 +116,99 @@ function clear_children(parent) {
     parent.innerHTML = "";
 }
 
-function make_pokemon_card(id, names, types) { }
+function make_pokemon_card(id, name, types_array, stats_obj) {
+    //make card body
+    let card_body = document.createElement("div");
+    card_body.classList.add("card");
+    //make card title
+    let card_title = document.createElement("div");
+    card_title.classList.add("card_title", "float_left");
+    let card_id = document.createElement("div");
+    let card_name = document.createElement("div");
+    card_id.textContent = "#" + id;
+    card_name.textContent = name;
+    card_title.appendChild(card_id);
+    card_title.appendChild(card_name);
+    //create the image
+    let card_img = document.createElement("img");
+    card_img.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + id + ".png";
+    card_img.alt = name;
+    card_img.classList.add("card_image", "clear_flex")
+    //creat types container
+    let type_cont = document.createElement("div");
+    type_cont.classList.add("card_type_cont", "float_left");
+    //create types
+    let card_type1 = document.createElement("div");
+    card_type1.classList.add("card_type");
+    card_type1.textContent = types_array[0];
+    let card_type2 = "";
+    if (types_array.length > 1) {
+        card_type2 = card_type1.cloneNode(true);
+        card_type2.textContent = types_array[1];
+    } else {
+        card_type2 = null;
+    }
+
+    type_cont.appendChild(card_type1);
+    if (card_type2) {
+        type_cont.appendChild(card_type2);
+    }
+
+    //create stats table
+    let hp = stats_obj["HP"];
+    let atk = stats_obj["Attack"];
+    let def = stats_obj["Defense"];
+    let spatk = stats_obj["Sp. Attack"];
+    let spdef = stats_obj["Sp. Defense"];
+    let speed = stats_obj["Speed"];
+
+    let stat_table = document.createElement("table");
+    stat_table.classList.add("card_stats_table");
+    row1 = stat_table.insertRow(0)
+
+
+    card_body.appendChild(card_title);
+    card_body.appendChild(card_img);
+    card_body.appendChild(type_cont);
+
+    return card_body;
+
+    // <div class="card">
+    //     <div class="card_title float_left">
+    //         <div>#20</div>
+    //         <div>Roucarnageionto</div>
+    //     </div>
+
+    //     <img class="card_image clear_flex" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="pkmnname">
+
+    //     <div class="card_type_cont float_left">
+    //         <div class="card_type">type1</div>
+    //         <div class="card_type">type2</div>
+    //     </div>
+
+    //     <table class="card_stats_table">
+    //         <tr>
+    //             <td>HP</td>
+    //             <td>16</td>
+    //             <td>Sp.Atk</td>
+    //             <td>7</td>
+    //         </tr>
+    //         <tr>
+    //             <td>Atk</td>
+    //             <td>10</td>
+    //             <td>Sp.Def</td>
+    //             <td>39</td>
+    //         </tr>
+    //         <tr>
+    //             <td>Def</td>
+    //             <td>30</td>
+    //             <td>Speed</td>
+    //             <td>67</td>
+    //         </tr>
+    //     </table>
+
+    // </div>
+}
 
 //-----------------------------
 
@@ -182,7 +274,22 @@ async function do_things() {
             }
         }
     })
+
+    //grid-column-start: 1;
+    let keepcount = 1;
+    for (i = 0; i < 10; i++) {
+        let card = make_pokemon_card(pkmn[i]["id"], pkmn[i]["name"]["english"], pkmn[i]["type"], pkmn[i]["base"]);
+        card.style.gridColumnStart = keepcount;
+        result_box.appendChild(card);
+        keepcount++
+        if (keepcount == 6) {
+            keepcount = 1;
+        }
+    }
 }
 
+
+
+
+
 do_things();
-console.log(window.location.search);

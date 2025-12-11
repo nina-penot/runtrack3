@@ -20,16 +20,16 @@
         <button id="button">RECHERCHER</button>
     </form>
 
-    <div class="result_container" id="result"></div>
+    <div class="result_container float_left" id="result"></div>
 
     <!-- card example -->
-    <div class="card">
+    <!-- <div class="card">
         <div class="card_title float_left">
-            <div>id</div>
-            <div>name</div>
+            <div>#20</div>
+            <div>Roucarnageionto</div>
         </div>
 
-        <div class="card_image clear_flex">img</div>
+        <img class="card_image clear_flex" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="pkmnname">
 
         <div class="card_type_cont float_left">
             <div class="card_type">type1</div>
@@ -57,7 +57,7 @@
             </tr>
         </table>
 
-    </div>
+    </div> -->
     <!-- SCRIPT -->
     <script src="./script.js"></script>
 </body>
