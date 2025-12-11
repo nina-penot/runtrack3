@@ -1,0 +1,76 @@
+:root {
+    --card_width: 220px;
+    --card_height: calc(var(--card_width) * 1.6)
+}
+
+/* USEFUL */
+
+.float_left {
+    display: flex;
+    float: left;
+}
+
+.clear_flex {
+    clear: both;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
+/* PAGE */
+
+.result_container {
+    min-height: 50px;
+    min-width: 80%;
+    border: 3px solid grey;
+    background-color: lightgray;
+    border-radius: 10px;
+}
+
+.card {
+    background-color: blue;
+    width: var(--card_width);
+    height: var(--card_height);
+    border-radius: 10px;
+    border: 3px solid black;
+}
+
+.card_title {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    margin: 3px 4px 3px 4px;
+    padding: 4px;
+    border: solid 2px black;
+}
+
+.card_image {
+    width: calc(var(--card_width) - 10%);
+    height: calc(var(--card_width) - 10%);
+    background-color: white;
+    border: solid 2px black;
+    margin: 0px auto 3px auto;
+}
+
+.card_type_cont {
+    margin: 0 0 5px 10px;
+    gap: 3px;
+}
+
+.card_type {
+    border-radius: 10px;
+    border: solid 2px black;
+    padding: 2px 5px 2px 5px;
+}
+
+.card_stats_table {
+    border: solid 2px black;
+    width: 90%;
+    padding: 5px;
+    margin: auto;
+    border-radius: 5px;
+    background-color: hsl(0, 0%, 100%, 0.9);
+    -webkit-text-stroke: 2px rgb(255, 255, 255);
+    paint-order: stroke fill;
+}

@@ -112,6 +112,12 @@ function search(json, id = "", name = "", type = "") {
     return search_ok;
 }
 
+function clear_children(parent) {
+    parent.innerHTML = "";
+}
+
+function make_pokemon_card(id, names, types) { }
+
 //-----------------------------
 
 const types_url = "https://pokeapi.co/api/v2/type";
@@ -136,6 +142,7 @@ async function get_types_data() {
 const type_selection = document.querySelector("select");
 const name_search = document.getElementById("name");
 const id_search = document.getElementById("id");
+const result_box = document.getElementById("result");
 // type_selection.addEventListener("input", (e) => {
 //     console.log(type_selection.value);
 // })
@@ -164,8 +171,16 @@ async function do_things() {
         let search_type = type_selection.value;
         let search_name = name_search.value;
         let search_id = id_search.value;
-
-        console.log(search(pkmn, search_id, search_name, search_type));
+        if (!search_type & !search_id & !search_name) {
+            console.log("No search!");
+        } else {
+            let search_result = search(pkmn, search_id, search_name, search_type);
+            if (Object.keys(search_result).length > 0) {
+                console.log(search(pkmn, search_id, search_name, search_type));
+            } else {
+                console.log("No element corresponds to this search.");
+            }
+        }
     })
 }
 
