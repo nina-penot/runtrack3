@@ -47,7 +47,8 @@ function str_contains(haystack, needle) {
 }
 
 function search(json, id = "", name = "", type = "") {
-    let search_ok = {}
+    // let search_ok = {}
+    let search_ok = [];
 
     for (num in json) {
         // console.log(json[num]["type"]);
@@ -102,10 +103,11 @@ function search(json, id = "", name = "", type = "") {
         }
 
         if (found["id"] & found["name"] & found["type"]) {
-            search_ok[json[num]["id"]] = {
-                "name": json[num]["name"],
-                "type": json[num]["type"]
-            }
+            // search_ok[json[num]["id"]] = {
+            //     "name": json[num]["name"],
+            //     "type": json[num]["type"]
+            // }
+            search_ok.push(num);
         }
     }
 
@@ -155,59 +157,47 @@ function make_pokemon_card(id, name, types_array, stats_obj) {
     }
 
     //create stats table
-    let hp = stats_obj["HP"];
-    let atk = stats_obj["Attack"];
-    let def = stats_obj["Defense"];
-    let spatk = stats_obj["Sp. Attack"];
-    let spdef = stats_obj["Sp. Defense"];
-    let speed = stats_obj["Speed"];
-
     let stat_table = document.createElement("table");
     stat_table.classList.add("card_stats_table");
-    row1 = stat_table.insertRow(0)
 
+    const new_stats_obj = {
+        0: "HP",
+        1: "Sp. Attack",
+        2: "Attack",
+        3: "Sp. Defense",
+        4: "Defense",
+        5: "Speed"
+    };
+
+    const stats_assoc = {
+        "HP": "Hp",
+        "Sp. Attack": "SpAtk",
+        "Attack": "Atk",
+        "Sp. Defense": "Def",
+        "Defense": "SpDef",
+        "Speed": "Speed"
+    }
+
+    let stat_count = 0;
+    for (r = 0; r <= 2; r++) {
+        let newrow = stat_table.insertRow(r);
+        for (c = 0; c <= 3; c++) {
+            let newcell = newrow.insertCell(c);
+            if (c % 2 == 0) {
+                newcell.textContent = stats_assoc[new_stats_obj[stat_count]];
+            } else {
+                newcell.textContent = stats_obj[new_stats_obj[stat_count]];
+                stat_count++
+            }
+        }
+    }
 
     card_body.appendChild(card_title);
     card_body.appendChild(card_img);
     card_body.appendChild(type_cont);
+    card_body.appendChild(stat_table);
 
     return card_body;
-
-    // <div class="card">
-    //     <div class="card_title float_left">
-    //         <div>#20</div>
-    //         <div>Roucarnageionto</div>
-    //     </div>
-
-    //     <img class="card_image clear_flex" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="pkmnname">
-
-    //     <div class="card_type_cont float_left">
-    //         <div class="card_type">type1</div>
-    //         <div class="card_type">type2</div>
-    //     </div>
-
-    //     <table class="card_stats_table">
-    //         <tr>
-    //             <td>HP</td>
-    //             <td>16</td>
-    //             <td>Sp.Atk</td>
-    //             <td>7</td>
-    //         </tr>
-    //         <tr>
-    //             <td>Atk</td>
-    //             <td>10</td>
-    //             <td>Sp.Def</td>
-    //             <td>39</td>
-    //         </tr>
-    //         <tr>
-    //             <td>Def</td>
-    //             <td>30</td>
-    //             <td>Speed</td>
-    //             <td>67</td>
-    //         </tr>
-    //     </table>
-
-    // </div>
 }
 
 //-----------------------------
@@ -264,28 +254,44 @@ async function do_things() {
         let search_name = name_search.value;
         let search_id = id_search.value;
         if (!search_type & !search_id & !search_name) {
-            console.log("No search!");
+            clear_children(result_box);
         } else {
+            clear_children(result_box);
             let search_result = search(pkmn, search_id, search_name, search_type);
-            if (Object.keys(search_result).length > 0) {
+            if (search_result.length > 0) {
+                let keepcount = 1;
+                for (i of search_result) {
+                    let card = make_pokemon_card(pkmn[i]["id"], pkmn[i]["name"]["english"], pkmn[i]["type"], pkmn[i]["base"]);
+                    card.style.gridColumnStart = keepcount;
+                    result_box.appendChild(card);
+                    keepcount++
+                    if (keepcount == 6) {
+                        keepcount = 1;
+                    }
+                }
                 console.log(search(pkmn, search_id, search_name, search_type));
             } else {
-                console.log("No element corresponds to this search.");
+                clear_children(result_box);
+                newdiv = document.createElement("div")
+                newdiv.style.gridColumnStart = 3;
+                newdiv.textContent = "Aucun élément ne correspond à votre recherche."
+                result_box.appendChild(newdiv);
+                // console.log("No element corresponds to this search.");
             }
         }
     })
 
     //grid-column-start: 1;
-    let keepcount = 1;
-    for (i = 0; i < 10; i++) {
-        let card = make_pokemon_card(pkmn[i]["id"], pkmn[i]["name"]["english"], pkmn[i]["type"], pkmn[i]["base"]);
-        card.style.gridColumnStart = keepcount;
-        result_box.appendChild(card);
-        keepcount++
-        if (keepcount == 6) {
-            keepcount = 1;
-        }
-    }
+    // let keepcount = 1;
+    // for (i = 0; i < 10; i++) {
+    //     let card = make_pokemon_card(pkmn[i]["id"], pkmn[i]["name"]["english"], pkmn[i]["type"], pkmn[i]["base"]);
+    //     card.style.gridColumnStart = keepcount;
+    //     result_box.appendChild(card);
+    //     keepcount++
+    //     if (keepcount == 6) {
+    //         keepcount = 1;
+    //     }
+    // }
 }
 
 
