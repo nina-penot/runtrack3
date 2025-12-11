@@ -3,16 +3,47 @@
 //-----------------------------
 
 function first_uppercase(str) {
-    capital = str[0].toUpperCase();
-    new_str = "";
-    for (i in str) {
-        if (i == 0) {
-            new_str += capital;
-        } else {
-            new_str += str[i];
+    // console.log(str);
+    if (typeof str != "undefined") {
+        let capital = str[0].toUpperCase();
+        new_str = "";
+        for (i in str) {
+            if (i == 0) {
+                new_str += capital;
+            } else {
+                new_str += str[i];
+            }
         }
+        return new_str;
     }
-    return new_str;
+}
+
+function are_same_str(str1, str2) {
+    let lower1 = str1.toLowerCase();
+    let lower2 = str2.toLowerCase();
+    if (lower1 == lower2) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Function that makes the strings lowercase and checks if one string is inside
+ * the other
+ * 
+ * @param {string} haystack The string that will be the container
+ * @param {string} needle The part we want to check is part of haystack
+ * @returns true|false
+ */
+function str_contains(haystack, needle) {
+    let hay_small = haystack.toLowerCase();
+    let needle_small = needle.toLowerCase();
+    if (hay_small.includes(needle_small)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function search(json, id = "", name = "", type = "") {
@@ -41,8 +72,10 @@ function search(json, id = "", name = "", type = "") {
 
         //check name
         if (name != "") {
-            for (n of pkmn_names) {
-                if (n.includes(name)) {
+            for (n in pkmn_names) {
+                // let lowered_data = pkmn_names[n].toLowerCase();
+                // let lowered_search = name.toLowerCase();
+                if (str_contains(pkmn_names[n], name)) {
                     found["name"] = true;
                     break;
                 }
@@ -70,7 +103,7 @@ function search(json, id = "", name = "", type = "") {
 
         if (found["id"] & found["name"] & found["type"]) {
             search_ok[json[num]["id"]] = {
-                "name": json[num]["name"]["english"],
+                "name": json[num]["name"],
                 "type": json[num]["type"]
             }
         }
@@ -101,6 +134,12 @@ async function get_types_data() {
 }
 
 const type_selection = document.querySelector("select");
+const name_search = document.getElementById("name");
+const id_search = document.getElementById("id");
+// type_selection.addEventListener("input", (e) => {
+//     console.log(type_selection.value);
+// })
+
 async function do_things() {
     //my data
     const pkmn = await get_pkmn_data();
@@ -112,15 +151,23 @@ async function do_things() {
     for (i of types.results) {
         if (!types_exceptions.includes(i.name)) {
             let myoption = document.createElement("option");
-            myoption.value = i.name;
-            myoption.textContent = first_uppercase(i.name);
+            let majup = first_uppercase(i.name);
+            myoption.value = majup;
+            myoption.textContent = majup;
             type_selection.appendChild(myoption);
         }
     }
 
-    console.log(search(pkmn, "", "", "Grass"));
-    //NOTE: only the name search left
-    //error regarding the fact it's an object, not an array
+    const mybutton = document.getElementById("button");
+    mybutton.addEventListener("click", (e) => {
+        e.preventDefault();
+        let search_type = type_selection.value;
+        let search_name = name_search.value;
+        let search_id = id_search.value;
+
+        console.log(search(pkmn, search_id, search_name, search_type));
+    })
 }
 
 do_things();
+console.log(window.location.search);

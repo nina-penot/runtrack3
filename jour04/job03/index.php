@@ -7,16 +7,16 @@
 </head>
 
 <body>
-    <form method="get">
+    <form method="get" id="search_form">
         <div>Rechercher id</div>
-        <input type="text" name="id">
+        <input type="text" name="id" id="id">
         <div>Rechercher nom</div>
-        <input type="text" name="name">
+        <input type="text" name="name" id="name">
         <div>Rechercher type</div>
         <select name="type" id="type">
             <option value="">??</option>
         </select>
-        <button>RECHERCHER</button>
+        <button id="button">RECHERCHER</button>
     </form>
     <!-- SCRIPT -->
     <script src="./script.js"></script>
