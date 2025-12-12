@@ -1,3 +1,5 @@
+/* UTIL */
+
 .flex_left {
     display: flex;
     float: left;
@@ -8,12 +10,20 @@
     flex-direction: column;
 }
 
+/* CLASSES */
+
+input {
+    display: block;
+    width: 90%;
+}
+
 .red {
     background-color: red;
 }
 
 .error {
     /* display: inline-block; */
+    max-width: 80%;
     color: rgb(194, 0, 0);
     background-color: rgb(255, 176, 176);
     border-radius: 10px;

@@ -32,6 +32,15 @@ function add_error_message(message, prev_element) {
     prev_element.after(el);
 }
 
+function is_name_ok(name) {
+    let regex = /^[a-zA-Z\p{L}\s\- ]+$/u;
+    if (name.match(regex)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 /**
  * Checks if email ok
  * @param {*} email the email to check
@@ -106,7 +115,6 @@ const input_array = [
 ];
 
 input_array.forEach((inp) => {
-    console.log(inp);
     inp.addEventListener("keydown", (e) => {
         if (e.key == "Delete") {
             e.preventDefault();
@@ -115,7 +123,6 @@ input_array.forEach((inp) => {
     })
 });
 
-console.log("-----------");
-for (i of input_array) {
-    console.log(i);
-}
+submit_btn.addEventListener("click", (e) => {
+    e.preventDefault();
+})
