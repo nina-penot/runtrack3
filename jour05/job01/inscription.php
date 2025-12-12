@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form>
+    <form id="inscription" method="post">
         <div>Nom</div>
         <input type="text" name="lastname" id="lastname" required
             placeholder="Entrez votre prénom (uniquement lettres, tirets et espaces.)">
@@ -20,7 +20,7 @@
         <input type="email" name="email" id="email" required
             placeholder="Entrez votre email (format: email@domain.topdom)">
         <div>Mot de passe</div>
-        <input type="password" name="password" id="password" required
+        <input type="password" name="password" id="password" required minlength="12"
             placeholder="Entrez votre mot de passe">
         <div>Adresse</div>
         <input type="text" name="adress" id="adress" required
@@ -28,7 +28,7 @@
         <div>Code postal</div>
         <input type="text" name="codep" id="pcode" required minlength="5" maxlength="5"
             placeholder="Entrez votre code postal (ex : 11555)">
-        <button id="submit">ENVOYER</button>
+        <button id="submit" type="submit">ENVOYER</button>
     </form>
 
 
