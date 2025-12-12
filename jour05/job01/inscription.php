@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/mycss.css">
+</head>
+
+<body>
+    <form>
+        <div>Nom</div>
+        <input type="text" name="lastname" id="lastname">
+        <div>Prénom</div>
+        <input type="text" name="name" id="name">
+        <div>Email</div>
+        <input type="text" name="email" id="email">
+        <div>Mot de passe</div>
+        <input type="text" name="password" id="password">
+        <div>Adresse</div>
+        <input type="text" name="adress" id="adress">
+        <div>Code postal</div>
+        <input type="text" name="codep" id="codep">
+    </form>
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

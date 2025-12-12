@@ -1,0 +1,13 @@
+.flex_left {
+    display: flex;
+    float: left;
+}
+
+.flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+.red {
+    background-color: red;
+}
