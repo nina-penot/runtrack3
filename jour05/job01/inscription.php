@@ -21,7 +21,7 @@
         <div>Adresse</div>
         <input type="text" name="adress" id="adress" required>
         <div>Code postal</div>
-        <input type="text" name="codep" id="codep" required>
+        <input type="text" name="codep" id="pcode" required minlength="5" maxlength="5">
         <button id="submit">ENVOYER</button>
     </form>
 

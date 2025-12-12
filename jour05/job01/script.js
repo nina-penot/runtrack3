@@ -76,7 +76,14 @@ function is_pass_ok(pass) {
 
 function is_pcode_ok(pcode) {
     //Must only be numbers
+    // let regex = /^[0-9]*$/;
+    let regex = /^[0-9]+$/;
     //Must have 5 numbers
+    if (pcode.match(regex) && pcode.length == 5) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 //CODE----------------------
@@ -88,3 +95,27 @@ const email_input = doc_id_get("email"),
     adress_input = doc_id_get("adress"),
     pcode_input = doc_id_get("pcode"),
     submit_btn = doc_id_get("submit");
+
+const input_array = [
+    email_input,
+    pass_input,
+    name_input,
+    lastname_input,
+    adress_input,
+    pcode_input,
+];
+
+input_array.forEach((inp) => {
+    console.log(inp);
+    inp.addEventListener("keydown", (e) => {
+        if (e.key == "Delete") {
+            e.preventDefault();
+            inp.value = "";
+        }
+    })
+});
+
+console.log("-----------");
+for (i of input_array) {
+    console.log(i);
+}
