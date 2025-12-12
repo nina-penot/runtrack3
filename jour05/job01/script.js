@@ -32,15 +32,45 @@ function add_error_message(message, prev_element) {
     prev_element.after(el);
 }
 
+/**
+ * Checks if email ok
+ * @param {*} email the email to check
+ * @returns bool
+ */
 function is_email_ok(email) {
     //check if email
+    let regex = /^((?!\.)[\w\-_.À-ÿ\u00f1\u00d1]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/umg;
+    if (email.match(regex)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function is_pass_ok(pass) {
     //Must have at least one number, one maj, one min and one special char
     //Must be at least 8 char long
+    let notlong = "Votre mot de passe doit contenir au moins 8 caractères.",
+        notcomplex = `Votre message doit contenir au moins un chiffre, 
+        une majuscule, une minuscule et un caractère spécial (!,?,%...)`,
+        errors = [];
+
     if (pass.length < 8) {
+        // add_error_message(notlong, pass_input);
+        errors.push(notlong);
+    }
+    if (!"regex here") {
+        // add_error_message(notcomplex, pass_input)
+        errors.push(notcomplex);
+    }
+
+    if (errors.length > 0) {
+        for (n of errors) {
+            add_error_message(n, pass_input);
+        }
         return false;
+    } else {
+        return true;
     }
 }
 
