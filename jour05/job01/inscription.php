@@ -11,17 +11,18 @@
 <body>
     <form>
         <div>Nom</div>
-        <input type="text" name="lastname" id="lastname">
+        <input type="text" name="lastname" id="lastname" required>
         <div>Prénom</div>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" required>
         <div>Email</div>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" required>
         <div>Mot de passe</div>
-        <input type="text" name="password" id="password">
+        <input type="text" name="password" id="password" required>
         <div>Adresse</div>
-        <input type="text" name="adress" id="adress">
+        <input type="text" name="adress" id="adress" required>
         <div>Code postal</div>
-        <input type="text" name="codep" id="codep">
+        <input type="text" name="codep" id="codep" required>
+        <button id="submit">ENVOYER</button>
     </form>
 
 

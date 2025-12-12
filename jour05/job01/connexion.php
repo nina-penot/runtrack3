@@ -10,11 +10,12 @@
 
 <body>
 
-    <form action="">
+    <form>
         <div>Email</div>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" required>
         <div>Mot de passe</div>
-        <input type="text" name="password" id="password">
+        <input type="text" name="password" id="password" required>
+        <button id="submit">ENVOYER</button>
     </form>
 
     <script src="./script.js"></script>

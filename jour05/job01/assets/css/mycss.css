@@ -11,3 +11,13 @@
 .red {
     background-color: red;
 }
+
+.error {
+    /* display: inline-block; */
+    color: rgb(194, 0, 0);
+    background-color: rgb(255, 176, 176);
+    border-radius: 10px;
+    border: solid 2px red;
+    padding: 5px;
+    overflow: hidden;
+}
