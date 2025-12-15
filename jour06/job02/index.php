@@ -113,16 +113,16 @@
             <!-- menu vertical -->
 
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <button type="button" class="btn btn-primary active">Limbes</button>
-                <button type="button" class="btn btn btn-light">Luxure</button>
-                <button type="button" class="btn btn btn-light">Gourmandise</button>
-                <button type="button" class="btn btn btn-light">Avarice</button>
-                <button type="button" class="btn btn btn-light">Colère</button>
-                <button type="button" class="btn btn btn-light">Hérésie</button>
-                <button type="button" class="btn btn btn-light">Violence</button>
-                <button type="button" class="btn btn btn-light">Ruse et tromperie</button>
-                <button type="button" class="btn btn btn-light">Trahison</button>
-                <button type="button" class="btn btn btn-light">Internet Explorer</button>
+                <button type="button" class="btn btn-primary active" data-bs-toggle="button">Limbes</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Luxure</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Gourmandise</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Avarice</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Colère</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Hérésie</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Violence</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Ruse et tromperie</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Trahison</button>
+                <button type="button" class="btn btn btn-light" data-bs-toggle="button">Internet Explorer</button>
             </div>
 
         </div>
@@ -133,12 +133,12 @@
         <div class="container-fluid w-50">
             <div class="d-flex justify-content-end">Installation de AI 9000</div>
             <div class="d-flex">
-                <button class="btn text-nowrap">←|</button>
+                <button id="bar_btn_left" class="btn text-nowrap">←|</button>
                 <!-- Bar -->
                 <div class="progress align-self-center" style="width: 100%;" role="progressbar" aria-label="Warning striped example" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                     <div class="progress-bar progress-bar-striped bg-warning" style="width: 85%"></div>
                 </div>
-                <button class="btn text-nowrap">|→</button>
+                <button id="bar_btn_right" class="btn text-nowrap">|→</button>
             </div>
 
         </div>

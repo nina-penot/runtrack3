@@ -15,7 +15,11 @@ function easy_id_get(id) {
 function easy_class_get(myclass) {
     cl = document.querySelectorAll(myclass);
     if (cl.length > 0) {
-        return cl;
+        if (cl.length <= 2) {
+            return cl[0];
+        } else {
+            return cl;
+        }
     } else {
         return null;
     }
