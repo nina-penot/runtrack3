@@ -114,8 +114,8 @@
 
 
         <!-- The two forms -->
-        <div class="container-fluid d-flex">
-            <form>
+        <div class="container-lg d-flex mb-2">
+            <form class="me-auto p-2">
                 <h4>Recevez votre copie gratuite d'internet 2 !</h4>
 
 
@@ -153,7 +153,7 @@
 
             </form>
 
-            <form>
+            <form class="p-2">
 
                 <label for="inputEmail4" class="form-label">Email</label>
                 <input type="email" class="form-control" id="inputEmail4">
