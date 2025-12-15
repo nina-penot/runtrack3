@@ -15,16 +15,16 @@
                 <ul class="navbar-nav d-flex flex-row column-gap-3">
                     <a class="navbar-brand" href="#">LPTF</a>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="#">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Units</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Jobs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <a class="nav-link disabled" aria-disabled="true">Skills</a>
                     </li>
                 </ul>
             </div>
@@ -34,7 +34,7 @@
     <main class="bg-secondary-subtle">
         <!-- Title -->
         <div class="container-fluid justify-content-center text-center">
-            <h1>La Plateforme_</h1>
+            <h1 class="display-4">La Plateforme_</h1>
         </div>
 
         <div class="container-fluid d-flex gap-4">
@@ -54,11 +54,16 @@
             <!-- Bonjour monde -->
 
             <div class="bg-light p-3">
-                <h2>Bonjour, monde!</h2>
-                <div>Il existe plusieurs visions du terme :</div>
-                <div>Le monde est la matière, l'espace et les phénomènes qui nous sont
+                <h1 class="display-4">Bonjour, monde!</h1>
+                <p class="lead">Il existe plusieurs visions du terme :</p>
+                <p class="lead">Le monde est la matière, l'espace et les phénomènes qui nous sont
                     accessibles par les sens, l'expérience ou la raison.
-                </div>
+                </p>
+                <p class="lead">Le sens le plus courant désigne notre planète Terre,
+                    avec ses habitants, et son environnement plus ou moins naturel.
+                </p>
+                <hr class="my-4">
+                <p>Le sens étendu désigne l'univers dans son ensemble.</p>
                 <button type="button" class="btn btn-danger">Rebooter le monde</button>
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -116,25 +121,26 @@
         <!-- The two forms -->
         <div class="container-lg d-flex mb-2">
             <form class="me-auto p-2">
-                <h4>Recevez votre copie gratuite d'internet 2 !</h4>
 
+                <h4>Recevez votre copie gratuite d'internet 2 !</h4>
 
                 <div class="input-group mb-3">
                     <span class="input-group-text">@</span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Login">
                         <label for="floatingInputGroup1">Login</label>
                     </div>
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Mot de passe">
                         <label for="floatingInputGroup1">Mot de passe</label>
                     </div>
                     <span class="input-group-text">@example.com</span>
                 </div>
 
+                <label for="floatingInputGroup1" class="form-label">URLs des internets 2 et 2.1 Beta</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text">DogeCoin</span>
                     <div class="form-floating">
@@ -153,7 +159,7 @@
 
             </form>
 
-            <form class="p-2">
+            <form class="p-2" style="height: 100%; align-content: space-between;">
 
                 <label for="inputEmail4" class="form-label">Email</label>
                 <input type="email" class="form-control" id="inputEmail4">
@@ -174,10 +180,6 @@
             </form>
         </div>
     </main>
-
-    <footer>
-
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
