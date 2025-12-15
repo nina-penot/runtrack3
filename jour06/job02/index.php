@@ -47,7 +47,27 @@
                     <p class="card-text">Le papillon de la Reine Alexandra est le plus grand papillon du monde. En anglais,
                         son nom contient "birdwing" (aile d'oiseau) car sa grande taille est comparable à certains oiseaux.
                     </p>
-                    <a href="#" class="btn btn-primary">Commander un papillon</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Commander un papillon
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Félicitations ! Regardez derrière vous...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -64,7 +84,7 @@
                 </p>
                 <hr class="my-4">
                 <p>Le sens étendu désigne l'univers dans son ensemble.</p>
-                <button type="button" class="btn btn-danger">Rebooter le monde</button>
+                <button id="rebootworld" type="button" class="btn btn-danger">Rebooter le monde</button>
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
@@ -93,7 +113,7 @@
             <!-- menu vertical -->
 
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <button type="button" class="btn btn-primary">Limbes</button>
+                <button type="button" class="btn btn-primary active">Limbes</button>
                 <button type="button" class="btn btn btn-light">Luxure</button>
                 <button type="button" class="btn btn btn-light">Gourmandise</button>
                 <button type="button" class="btn btn btn-light">Avarice</button>
@@ -112,9 +132,15 @@
         <!-- Progress bar -->
         <div class="container-fluid w-50">
             <div class="d-flex justify-content-end">Installation de AI 9000</div>
-            <div class="progress" role="progressbar" aria-label="Warning striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                <div class="progress-bar progress-bar-striped bg-warning" style="width: 85%"></div>
+            <div class="d-flex">
+                <button class="btn text-nowrap">←|</button>
+                <!-- Bar -->
+                <div class="progress align-self-center" style="width: 100%;" role="progressbar" aria-label="Warning striped example" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-warning" style="width: 85%"></div>
+                </div>
+                <button class="btn text-nowrap">|→</button>
             </div>
+
         </div>
 
 
@@ -180,7 +206,9 @@
             </form>
         </div>
     </main>
+    <script src="./convenient_func.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
