@@ -1,10 +1,11 @@
-$(function () {
-    function shuffle_array(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
+function shuffle_array(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+$(function () {
 
     const correct_rainbow = [];
     const shuffled_rainbow = [];
@@ -15,5 +16,9 @@ $(function () {
 
     shuffle_array(shuffled_rainbow);
     console.log(shuffled_rainbow);
+
+    myslots = document.querySelectorAll(".jslot");
+    console.log("my slots :");
+    console.log(myslots);
 
 });
