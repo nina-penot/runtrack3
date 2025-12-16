@@ -26,7 +26,14 @@ rebootworld_btn.addEventListener("click", (e) => {
     monde_text_elems[2].textContent = blade_runner[2];
 });
 
+const wordsarray = [monde_og_text, blade_runner, waluigi_quotes];
+
 //pagination changes main block to Blade Runner quotes
+function page_change(num) {
+    monde_text_elems[0].textContent = wordsarray[num - 1][0];
+    monde_text_elems[1].textContent = wordsarray[num - 1][1];
+    monde_text_elems[2].textContent = wordsarray[num - 1][2];
+}
 
 //progress bar button
 const bar_btnleft = easy_id_get("bar_btn_left");
