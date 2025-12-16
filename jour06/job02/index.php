@@ -203,25 +203,38 @@
 
             </form>
 
-            <form class="p-2" style="height: 100%; align-content: space-between;">
+            <form id="rightform" class="p-2 needs-validation was-validated" style="height: 100%; align-content: space-between;" novalidate="">
 
                 <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
-                <div class="form-text" id="basic-addon4">Example help text goes outside the input group.</div>
+                <input type="email" class="form-control" id="inputEmail4" required>
+                <div class="valid-tooltip" id="basic-addon4">Validated!</div>
+                <div class="invalid-tooltip">
+                    Enter email.
+                </div>
+
+                <label for="validationTooltip01" class="form-label">First name</label>
+                <input type="text" class="form-control" id="validationTooltip01" required="">
+                <div class="invalid-tooltip">
+                    Enter first name.
+                </div>
 
                 <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
+                <input type="password" class="form-control" id="inputPassword4" required>
+                <div class="invalid-tooltip" id="basic-addon5">Please enter password.</div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
                     <label class="form-check-label" for="gridCheck">
                         Check me out
                     </label>
+                    <div class="invalid-feedback">
+                        You MUST check me out!!
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-
             </form>
+
         </div>
     </main>
     <script src="./convenient_func.js"></script>

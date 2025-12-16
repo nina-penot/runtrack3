@@ -98,11 +98,9 @@ window.addEventListener("keydown", (e) => {
         }
     }
 
-    console.log(code_enter);
     let code_enter_str = code_enter.toString();
     if (code_enter.length == mycode.length) {
         if (code_enter_str == mycode_str) {
-            console.log("success get");
             form_modal_boot.show();
             code_enter = [];
         } else {
@@ -114,3 +112,44 @@ window.addEventListener("keydown", (e) => {
 //Successful right form submit = random color on spinner
 
 const spinner_elem = easy_id_get("spinner");
+const rightform = easy_id_get("rightform");
+const inputthing = easy_id_get("inputEmail4");
+
+function change_spinner_color(color) {
+    spinner_elem.classList = [];
+    spinner_elem.classList.add("spinner-border");
+    spinner_elem.classList.add(color);
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+const possible_colors = [
+    "text-danger",
+    "text-warning",
+    "text-success",
+    "text-dark"
+];
+
+rightform.addEventListener("input", (e) => {
+    let randnum = getRandomInt(possible_colors.length - 1);
+    console.log(rightform.checkValidity());
+    console.log(randnum);
+
+    if (rightform.checkValidity()) {
+        change_spinner_color(possible_colors[randnum]);
+    } else {
+        change_spinner_color("text-primary");
+    }
+});
+
+// if (rightform.checkValidity()) {
+//     spinner_elem.classList.remove();
+//     spinner_elem.classList.add("spinner-border");
+//     spinner_elem.classList.add("text-danger");
+// } else {
+//     spinner_elem.classList.remove();
+//     spinner_elem.classList.add("spinner-border");
+//     spinner_elem.classList.add("text-primary");
+// }
