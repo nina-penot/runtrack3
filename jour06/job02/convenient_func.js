@@ -50,7 +50,7 @@ function easy_quick_create(tag_type, classtoadd = null, textcontent = null, id =
     }
 
     if (textcontent != null) {
-        new_el.textcontent = textcontent;
+        new_el.textContent = textcontent;
     }
 
     if (id != null) {

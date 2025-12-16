@@ -53,16 +53,34 @@
                 </div>
             </div>
 
-            <!-- Modal -->
+            <!-- Modal (papillon) -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Papillon GET</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             Félicitations ! Regardez derrière vous...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal(form sum up) -->
+            <div class="modal fade" id="form_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="form_modal_label">CODE PROCESSED</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="form_modal_text" class="modal-body">
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,7 +103,7 @@
                 <hr class="my-4">
                 <p>Le sens étendu désigne l'univers dans son ensemble.</p>
                 <button id="rebootworld" type="button" class="btn btn-danger">Rebooter le monde</button>
-                <div class="spinner-border text-primary" role="status">
+                <div id="spinner" class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
 
@@ -146,7 +164,7 @@
 
         <!-- The two forms -->
         <div class="container-lg d-flex mb-2">
-            <form class="me-auto p-2">
+            <form id="leftform" class="me-auto p-2">
 
                 <h4>Recevez votre copie gratuite d'internet 2 !</h4>
 
@@ -160,17 +178,17 @@
 
                 <div class="input-group mb-3">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Mot de passe">
-                        <label for="floatingInputGroup1">Mot de passe</label>
+                        <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Mot de passe">
+                        <label for="floatingInputGroup2">Mot de passe</label>
                     </div>
                     <span class="input-group-text">@example.com</span>
                 </div>
 
-                <label for="floatingInputGroup1" class="form-label">URLs des internets 2 et 2.1 Beta</label>
+                <label for="floatingInputGroup3" class="form-label">URLs des internets 2 et 2.1 Beta</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text">DogeCoin</span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                        <input type="text" class="form-control" id="floatingInputGroup3" placeholder="Dogecoin">
                     </div>
                     <span class="input-group-text">.00</span>
                 </div>
@@ -178,7 +196,7 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">https://website/</span>
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingInputGroup1" placeholder="Username">
+                        <input type="text" class="form-control" id="floatingInputGroup4" placeholder="website">
                     </div>
                 </div>
 
