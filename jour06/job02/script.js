@@ -143,13 +143,3 @@ rightform.addEventListener("input", (e) => {
         change_spinner_color("text-primary");
     }
 });
-
-// if (rightform.checkValidity()) {
-//     spinner_elem.classList.remove();
-//     spinner_elem.classList.add("spinner-border");
-//     spinner_elem.classList.add("text-danger");
-// } else {
-//     spinner_elem.classList.remove();
-//     spinner_elem.classList.add("spinner-border");
-//     spinner_elem.classList.add("text-primary");
-// }
