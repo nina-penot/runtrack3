@@ -42,84 +42,89 @@
         <section class="container">
             <h3>Formulaire</h3>
             <form class="col s12">
-                <label>
-                    <input class="with-gap" name="group1" type="radio" />
-                    <span>Monsieur</span>
-                </label>
 
-                <label>
-                    <input class="with-gap" name="group1" type="radio" />
-                    <span>Madame</span>
-                </label>
+                <div class="row">
+                    <p><i class="material-icons left">settings_accessibility</i>Civilité</p>
+                    <label>
+                        <input class="with-gap" name="group1" type="radio" />
+                        <span><i class="material-icons left">male</i>Monsieur</span>
+                    </label>
 
-                <label>
-                    <input class="with-gap" name="group1" type="radio" />
-                    <span>Autre</span>
-                </label>
+                    <label>
+                        <input class="with-gap" name="group1" type="radio" />
+                        <span><i class="material-icons left">female</i>Madame</span>
+                    </label>
+
+                    <label>
+                        <input class="with-gap" name="group1" type="radio" />
+                        <span><i class="material-icons left">transgender</i>Autre</span>
+                    </label>
+                </div>
 
                 <div class="row">
                     <div class="input-field col s6">
                         <input placeholder="Entrez votre prénom..." id="first_name" type="text" class="validate">
-                        <label for="first_name">Prénom</label>
+                        <label for="first_name"><i class="material-icons left">person</i>Prénom</label>
                     </div>
 
                     <div class="input-field col s6">
                         <input placeholder="Entrez votre nom..." id="last_name" type="text" class="validate">
-                        <label for="last_name">Nom</label>
+                        <label for="last_name"><i class="material-icons left">person</i>Nom</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <input placeholder="Entrez votre adresse..." id="address" type="text" class="validate">
-                        <label for="address">Adresse</label>
+                        <label for="address"><i class="material-icons left">home</i>Adresse</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="email" type="email" placeholder="Votre email..." class="validate">
-                        <label for="email">Email</label>
+                        <label for="email"><i class="material-icons left">alternate_email</i>Email</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="password" type="password" class="validate">
-                        <label for="password">Mot de passe</label>
+                        <label for="password"><i class="material-icons left">key</i>Mot de passe</label>
                     </div>
                 </div>
 
-                <h4>Sélectionnez vos passions</h4>
+                <p><i class="material-icons left">celebration</i>Sélectionnez vos passions</p>
 
                 <div class="row">
                     <p class="col s3">
                         <label>
                             <input type="checkbox" />
-                            <span>Informatique</span>
+                            <span><i class="material-icons left">computer</i>Informatique</span>
                         </label>
                     </p>
                     <p class="col s3">
                         <label>
                             <input type="checkbox" />
-                            <span>Sport</span>
+                            <span><i class="material-icons left">fitness_center</i>Sport</span>
                         </label>
                     </p>
                     <p class="col s3">
                         <label>
                             <input type="checkbox" />
-                            <span>Voyages</span>
+                            <span><i class="material-icons left">flight</i>Voyages</span>
                         </label>
                     </p>
                     <p class="col s3">
                         <label>
                             <input type="checkbox" />
-                            <span>Lecture</span>
+                            <span><i class="material-icons left">auto_stories</i>Lecture</span>
                         </label>
                     </p>
                 </div>
 
-                <button class="btn blue" type="submit">ENVOYER</button>
+                <button class="btn blue" type="submit">ENVOYER<i
+                        class="material-icons right">arrow_forward_ios</i></button>
 
             </form>
         </section>
