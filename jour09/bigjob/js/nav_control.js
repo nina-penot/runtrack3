@@ -17,6 +17,9 @@ const nav_main = easy_id_get("navmenu"),
 if (is_logged_in()) {
     clear_children(nav_main);
     easy_append_children(nav_main, [nav_deconn, nav_calendar]);
+    if (is_user_admin(user) || is_user_mod(user)) {
+        easy_append_children(nav_main, nav_backoffice);
+    }
 } else {
     clear_children(nav_main);
     easy_append_children(nav_main, [nav_insc, nav_conn]);
