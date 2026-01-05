@@ -1,3 +1,7 @@
+//------------------------------------------
+// USER MANAGEMENT
+//------------------------------------------
+
 async function loadUsers() {
     try {
         const response = await fetch("data/users.json");
@@ -22,9 +26,17 @@ function verify_password(email, pass) {
     //get this users pass
 }
 
-function connect(user) { }
+function connect(user) {
+    sessionStorage.setItem("login", user);
+}
 
-function is_logged_in() { }
+function is_logged_in() {
+    if (sessionStorage.getItem("login")) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function get_user_role(user) { }
 
@@ -50,3 +62,19 @@ function register(name, lastname, email, pass) {
 }
 
 function logout() { }
+
+//------------------------------------------
+// ELEMENTS
+//------------------------------------------
+
+function make_nav_elem(link, name, id) {
+    let myli = easy_quick_create("li", "nav-item", null, id);
+    let mylink = easy_quick_create("a", "nav-link", name);
+    mylink.href = link;
+    myli.appendChild(mylink);
+    return myli;
+}
+
+function clear_children(element) {
+    element.innerHTML = "";
+}
