@@ -26,14 +26,27 @@ function verify_plateforme(email) {
 
 function does_email_exists(email) {
     //search for this email in json
+    const users = JSON.parse(localStorage.getItem("users"));
     //if email exists return true
+    if (users.find(u => u.email === email)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function verify_password(email, pass) {
     //search user from email
+    const myuser = users.find(u => u.email === email);
     //get this users pass
+    const myuserpass = myuser.password;
     //compare to the pass
-    //return true if same
+    if (myuserpass == pass) {
+        //return true if same
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function connect(user) {
@@ -104,4 +117,20 @@ function make_nav_elem(link, name, id) {
 
 function clear_children(element) {
     element.innerHTML = "";
+}
+
+function show_error(elem_before, error_message) {
+    let myerror = easy_quick_create("div", "error", error_message);
+    elem_before.after(myerror);
+}
+
+function clear_errors() {
+    let errors = easy_class_get("error");
+    if (is_array(errors)) {
+        for (i in errors) {
+            errors[i].remove();
+        }
+    } else {
+        errors.remove();
+    }
 }

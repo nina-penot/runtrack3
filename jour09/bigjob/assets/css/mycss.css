@@ -2,3 +2,7 @@
     padding-top: 1vw;
     padding-bottom: 1vw;
 }
+
+.error {
+    color: rgb(196, 0, 0);
+}
