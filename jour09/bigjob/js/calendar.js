@@ -12,3 +12,7 @@ let day = curr_date.getDate() > 9 ? curr_date.getDate() : "0" + curr_date.getDat
 let mydate = curr_date.getFullYear() + "-" + month + "-" + day;
 console.log(mydate);
 datepick.min = mydate;
+
+if (is_past_date(datepick.value)) {
+
+}
