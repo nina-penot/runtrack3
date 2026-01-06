@@ -17,7 +17,8 @@ function verify_conn_form(e) {
         } else {
             if (password.value != "") {
                 if (verify_password(email.value, password.value)) {
-                    sessionStorage.setItem("login", email.value);
+                    connect(email.value);
+                    redirect("index.html");
                 } else {
                     e.preventDefault();
                     show_error(password, "Mot de passe incorrect.")

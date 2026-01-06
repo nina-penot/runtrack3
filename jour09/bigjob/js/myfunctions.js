@@ -2,6 +2,10 @@
 // USER MANAGEMENT
 //------------------------------------------
 
+/**
+ * Charge les utilisateurs dans le localstorage
+ * @returns 
+ */
 async function loadUsers() {
     try {
         const response = await fetch("data/users.json");
@@ -15,15 +19,30 @@ async function loadUsers() {
     }
 }
 
+/**
+ * Vérifie si il s'agit d'un email
+ * @param {*} email 
+ * @returns 
+ */
 function verify_email(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
+/**
+ * Vérifie si l'email fait parti du domaine de la plateforme
+ * @param {*} email 
+ * @returns 
+ */
 function verify_plateforme(email) {
     return email.endsWith("@laplateforme.io");
 }
 
+/**
+ * Vérifie si un email existe dans les données
+ * @param {*} email 
+ * @returns 
+ */
 function does_email_exists(email) {
     //search for this email in json
     const users = JSON.parse(localStorage.getItem("users"));
@@ -35,6 +54,12 @@ function does_email_exists(email) {
     }
 }
 
+/**
+ * Vérifie si un mot de passe est correct lors de la connexion
+ * @param {*} email 
+ * @param {*} pass 
+ * @returns 
+ */
 function verify_password(email, pass) {
     //search user from email
     const myuser = users.find(u => u.email === email);
@@ -49,6 +74,10 @@ function verify_password(email, pass) {
     }
 }
 
+/**
+ * Connecte un utilisateur.
+ * @param {*} user 
+ */
 function connect(user) {
     sessionStorage.setItem("login", user);
 }
@@ -57,6 +86,10 @@ function redirect(page) {
     window.location.href(page);
 }
 
+/**
+ * Vérifie si connécté
+ * @returns 
+ */
 function is_logged_in() {
     if (sessionStorage.getItem("login")) {
         return true;
@@ -65,12 +98,33 @@ function is_logged_in() {
     }
 }
 
+/**
+ * Récupère le role de l'utilisateur
+ * @param {*} user 
+ */
 function get_user_role(user) { }
 
+/**
+ * Vérifie si l'utilisateur est admin
+ * @param {*} user 
+ */
 function is_user_admin(user) { }
 
+/**
+ * Vérifie si l'utilisateur est modérateur
+ * @param {*} user 
+ */
 function is_user_mod(user) { }
 
+/**
+ * Enregistre un nouvel utilisateur.
+ * 
+ * @param {*} nom 
+ * @param {*} prenom 
+ * @param {*} email 
+ * @param {*} password 
+ * @returns 
+ */
 function register(nom, prenom, email, password) {
     // Validation de l'email
     if (!verify_plateforme(email)) {
@@ -88,8 +142,21 @@ function register(nom, prenom, email, password) {
     return { success: true };
 }
 
+/**
+ * Déconnecte l'utilisateur
+ */
 function logout() {
     sessionStorage.removeItem("login");
+}
+
+/**
+ * Vérifie qu'un nom n'a que des lettres, espaces ou tirets.
+ * @param {*} name 
+ * @returns 
+ */
+function verify_name(name) {
+    const regex = /^[a-zA-Z\p{L}\s\- ]+$/u;
+    return regex.test(name);
 }
 
 //------------------------------------------
