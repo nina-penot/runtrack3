@@ -6,3 +6,7 @@
 .error {
     color: rgb(196, 0, 0);
 }
+
+.success {
+    color: rgb(0, 169, 62);
+}

@@ -27,6 +27,7 @@ async function load_requests() {
         const requests = await response.json();
         // Sauvegarde
         if (!localStorage.getItem("requests")) {
+            console.log("generating...");
             localStorage.setItem("requests", JSON.stringify(requests));
         };
         return requests;
@@ -195,10 +196,20 @@ function register(nom, prenom, email, password) {
 function save_request(email, mydate) {
     // Création de l'utilisateur
     const requests = JSON.parse(localStorage.getItem("requests")) || [];
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    if (!users) {
+        load_users();
+    }
+
+    const myuser = users.find(u => u.email === email);
+
     const new_request = {
-        user: email,
-        date: mydate
+        id: Date.now(),
+        user_id: myuser.id,
+        date: mydate,
+        status: "pending"
     };
+
     requests.push(new_request);
     localStorage.setItem("requests", JSON.stringify(requests));
     return { success: true };
@@ -232,6 +243,14 @@ function is_pass_safe(password) {
     } else {
         return false;
     }
+}
+
+function change_user_role(user, newrole) {
+    //search user from email
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.email === user);
+    //change this users role
+    myuser.role = newrole;
 }
 
 //------------------------------------------
@@ -268,6 +287,11 @@ function show_error(elem_before, error_message) {
     elem_before.after(myerror);
 }
 
+function show_success(elem_before, success_message) {
+    let mysuccess = easy_quick_create("div", "success", success_message);
+    elem_before.after(mysuccess);
+}
+
 function clear_errors() {
     let errors = easy_class_get("error");
     if (errors != null) {
@@ -281,4 +305,14 @@ function clear_errors() {
             errors.remove();
         }
     }
+}
+
+function create_role_table() {
+    let newtable = easy_quick_create("table", "table", null, "role_table");
+    let title1 = easy_quick_create("th", null, "Utilisateur"),
+        title2 = easy_quick_create("th", null, "Role"),
+        title3 = easy_quick_create("th", null, "Toggle");
+    easy_append_children(newtable, easy_quick_create("tr"));
+    easy_append_children(newtable.firstChild, [title1, title2, title3]);
+    return newtable;
 }

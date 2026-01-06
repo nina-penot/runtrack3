@@ -1,4 +1,6 @@
 //get email + pass inputs
+load_users();
+
 const password = easy_id_get("password"),
     email = easy_id_get("email"),
     name_ = easy_id_get("nom"),
