@@ -6,16 +6,31 @@
  * Charge les utilisateurs dans le localstorage
  * @returns 
  */
-async function loadUsers() {
+async function load_users() {
     try {
         const response = await fetch("data/users.json");
         const users = await response.json();
         // Sauvegarde
         if (!localStorage.getItem("users")) {
             localStorage.setItem("users", JSON.stringify(users));
-        }
+        };
         return users;
     } catch (error) {
+        console.error("Erreur de chargement:", error);
+        return [];
+    }
+}
+
+async function load_requests() {
+    try {
+        const response = await fetch("data/requests.json");
+        const requests = await response.json();
+        // Sauvegarde
+        if (!localStorage.getItem("requests")) {
+            localStorage.setItem("requests", JSON.stringify(requests));
+        };
+        return requests;
+    } catch {
         console.error("Erreur de chargement:", error);
         return [];
     }
@@ -174,6 +189,18 @@ function register(nom, prenom, email, password) {
     };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
+    return { success: true };
+}
+
+function save_request(email, mydate) {
+    // Création de l'utilisateur
+    const requests = JSON.parse(localStorage.getItem("requests")) || [];
+    const new_request = {
+        user: email,
+        date: mydate
+    };
+    requests.push(new_request);
+    localStorage.setItem("requests", JSON.stringify(requests));
     return { success: true };
 }
 

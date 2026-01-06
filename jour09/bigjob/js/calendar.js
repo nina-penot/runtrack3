@@ -13,6 +13,13 @@ let mydate = curr_date.getFullYear() + "-" + month + "-" + day;
 console.log(mydate);
 datepick.min = mydate;
 
-if (is_past_date(datepick.value)) {
+function requestPresence() {
+    if (is_past_date(datepick.value)) {
+        show_error(datepick, "Date invalide.");
+    } else {
+        //save date in requests
+        let requests = JSON.parse(localStorage.getItem("requests"));
 
+    }
 }
+
