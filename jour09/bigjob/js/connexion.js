@@ -1,13 +1,41 @@
 //get email + pass inputs
 const password = easy_id_get("password"),
-    email = easy_id_get("email");
+    email = easy_id_get("email"),
+    btn = easy_id_get("conn_button");
 
-function verify_conn_form() {
+function verify_conn_form(e) {
+
     clear_errors();
-    if (password == "") {
-        show_error(password, "Vous devez remplir ce champ.")
+
+    if (email.value == "") {
+        e.preventDefault();
+        show_error(email, "Vous devez remplir ce champ.");
+    } else {
+        if (!does_email_exists(email.value)) {
+            e.preventDefault();
+            show_error(email, "Cet email n'existe pas.");
+        } else {
+            if (password.value != "") {
+                if (verify_password(email.value, password.value)) {
+                    sessionStorage.setItem("login", email.value);
+                } else {
+                    e.preventDefault();
+                    show_error(password, "Mot de passe incorrect.")
+                }
+            }
+        }
     }
-    if (email == "") {
-        show_error(email, "Vous devez remplir ce champ.")
+
+    if (password.value == "") {
+        e.preventDefault();
+        show_error(password, "Vous devez remplir ce champ.");
+    } else {
+        if (email.value == "") {
+            e.preventDefault();
+            show_error(password, "Veuillez renseigner votre email.");
+        }
     }
+
 }
+
+btn.addEventListener("click", verify_conn_form);

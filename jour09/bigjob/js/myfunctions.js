@@ -126,11 +126,15 @@ function show_error(elem_before, error_message) {
 
 function clear_errors() {
     let errors = easy_class_get("error");
-    if (is_array(errors)) {
-        for (i in errors) {
-            errors[i].remove();
+    if (errors != null) {
+        // console.log(errors.length);
+        // console.log(errors);
+        if (errors.length > 1) {
+            for (i = 0; i < errors.length; i++) {
+                errors[i].remove();
+            }
+        } else {
+            errors.remove();
         }
-    } else {
-        errors.remove();
     }
 }
