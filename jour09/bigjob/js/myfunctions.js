@@ -256,6 +256,17 @@ function change_user_role(user, newrole) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
+function change_request_status(userid, newstatus) {
+    //search user from email
+    const requests = JSON.parse(localStorage.getItem("requests"));
+    const myrequest = requests.find(u => u.user_id === userid);
+    const myrequ_index = requests.findIndex(u => u.user_id === userid);
+    //change this users role
+    myrequest.status = newstatus;
+    requests[myrequ_index] = myrequest;
+    localStorage.setItem("requests", JSON.stringify(requests));
+}
+
 function get_mail_from_id(userid) {
     const users = JSON.parse(localStorage.getItem("users"));
     const myuser = users.find(u => u.id === userid);
@@ -321,8 +332,9 @@ function create_role_table() {
     let title1 = easy_quick_create("th", null, "Utilisateur"),
         title2 = easy_quick_create("th", null, "Role"),
         title3 = easy_quick_create("th", null, "Toggle");
-    easy_append_children(newtable, easy_quick_create("tr"));
-    easy_append_children(newtable.firstChild, [title1, title2, title3]);
+    easy_append_children(newtable, easy_quick_create("thead"));
+    easy_append_children(newtable, easy_quick_create("tbody"));
+    easy_append_children(newtable.tHead, [title1, title2, title3]);
     return newtable;
 }
 
@@ -368,5 +380,42 @@ function create_role_buttons_group() {
 
     easy_append_children(group, [btn1, btn2, btn3]);
 
+    return group;
+}
+
+function create_request_buttons_group() {
+    let group = easy_quick_create("div", "btn-group"),
+        btn1 = easy_quick_create("button", ["btn", "btn-success"], "Accept"),
+        btn2 = easy_quick_create("button", ["btn", "btn-danger"], "Refuse");
+
+    btn1.addEventListener("click", (e) => {
+        //get parent td
+        let parent = group.parentElement;
+        let status = parent.parentElement.children[2];
+        console.log(status);
+        //accept request
+        change_request_status(userid, "accepted");
+        //replace content of parent td with "accepted"
+        status.textContent = "acceptée";
+        //remove the buttons
+        parent.innerHTML = "";
+        parent.textContent = "-";
+    });
+
+    btn2.addEventListener("click", (e) => {
+        //get parent td
+        let parent = group.parentElement;
+        let status = parent.parentElement.children[2];
+        console.log(status);
+        //refuse request
+        change_request_status(userid, "refused");
+        //replace content of parent td with "accepted"
+        status.textContent = "refusé";
+        //remove the buttons
+        parent.innerHTML = "";
+        parent.textContent = "-";
+    });
+
+    easy_append_children(group, [btn1, btn2]);
     return group;
 }
