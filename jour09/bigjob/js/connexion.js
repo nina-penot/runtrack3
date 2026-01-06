@@ -17,6 +17,7 @@ function verify_conn_form(e) {
         } else {
             if (password.value != "") {
                 if (verify_password(email.value, password.value)) {
+                    e.preventDefault();
                     connect(email.value);
                     redirect("index.html");
                 } else {

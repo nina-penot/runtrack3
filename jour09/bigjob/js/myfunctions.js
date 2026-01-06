@@ -11,7 +11,9 @@ async function loadUsers() {
         const response = await fetch("data/users.json");
         const users = await response.json();
         // Sauvegarde
-        localStorage.setItem("users", JSON.stringify(users));
+        if (!localStorage.getItem("users")) {
+            localStorage.setItem("users", JSON.stringify(users));
+        }
         return users;
     } catch (error) {
         console.error("Erreur de chargement:", error);
@@ -62,6 +64,7 @@ function does_email_exists(email) {
  */
 function verify_password(email, pass) {
     //search user from email
+    const users = JSON.parse(localStorage.getItem("users"));
     const myuser = users.find(u => u.email === email);
     //get this users pass
     const myuserpass = myuser.password;
@@ -83,7 +86,7 @@ function connect(user) {
 }
 
 function redirect(page) {
-    window.location.href(page);
+    window.location.href = page;
 }
 
 /**
@@ -102,19 +105,51 @@ function is_logged_in() {
  * Récupère le role de l'utilisateur
  * @param {*} user 
  */
-function get_user_role(user) { }
+function get_user_role(user) {
+    //search user from email
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.email === user);
+    //return this users role
+    return myuser.role;
+}
 
 /**
  * Vérifie si l'utilisateur est admin
  * @param {*} user 
  */
-function is_user_admin(user) { }
+function is_user_admin(user) {
+    //search user from email
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.email === user);
+    //get this users role
+    const role = myuser.role;
+    //compare to the pass
+    if (role == "admin") {
+        //return true if admin
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Vérifie si l'utilisateur est modérateur
  * @param {*} user 
  */
-function is_user_mod(user) { }
+function is_user_mod(user) {
+    //search user from email
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.email === user);
+    //get this users role
+    const role = myuser.role;
+    //compare to the pass
+    if (role == "mod") {
+        //return true if admin
+        return true;
+    } else {
+        return false;
+    }
+}
 
 /**
  * Enregistre un nouvel utilisateur.
@@ -159,6 +194,19 @@ function verify_name(name) {
     return regex.test(name);
 }
 
+function is_pass_safe(password) {
+    let hasUpperCase = /[A-Z]/.test(password);
+    let hasLowerCase = /[a-z]/.test(password);
+    let hasNumbers = /\d/.test(password);
+    let hasNonalphas = /\W/.test(password);
+
+    if (hasLowerCase & hasUpperCase & hasNumbers & hasNonalphas & password.length >= 8) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //------------------------------------------
 // CALENDAR
 //------------------------------------------
@@ -177,7 +225,9 @@ function is_past_date(dateString) {
 function make_nav_elem(link, name, id) {
     let myli = easy_quick_create("li", "nav-item", null, id);
     let mylink = easy_quick_create("a", "nav-link", name);
-    mylink.href = link;
+    if (link != null) {
+        mylink.href = link;
+    }
     myli.appendChild(mylink);
     return myli;
 }

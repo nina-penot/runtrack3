@@ -14,7 +14,14 @@ const nav_main = easy_id_get("navmenu"),
     nav_backoffice = make_nav_elem("backoffice.html", "Backoffice", "backoffice"),
     nav_calendar = make_nav_elem("calendrier.html", "Calendrier", "calendrier");
 
+nav_deconn.firstChild.addEventListener("click", (e) => {
+    e.preventDefault();
+    logout();
+    redirect("index.html");
+})
+
 if (is_logged_in()) {
+    let user = sessionStorage.getItem("login");
     clear_children(nav_main);
     easy_append_children(nav_main, [nav_deconn, nav_calendar]);
     if (is_user_admin(user) || is_user_mod(user)) {
