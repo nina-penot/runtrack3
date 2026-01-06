@@ -249,8 +249,17 @@ function change_user_role(user, newrole) {
     //search user from email
     const users = JSON.parse(localStorage.getItem("users"));
     const myuser = users.find(u => u.email === user);
+    const myuser_index = users.findIndex(u => u.email === user);
     //change this users role
     myuser.role = newrole;
+    users[myuser_index] = myuser;
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+function get_mail_from_id(userid) {
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.id === userid);
+    return myuser.email;
 }
 
 //------------------------------------------
@@ -308,11 +317,56 @@ function clear_errors() {
 }
 
 function create_role_table() {
-    let newtable = easy_quick_create("table", "table", null, "role_table");
+    let newtable = easy_quick_create("table", ["table", "table-striped", "mt-4"], null, "role_table");
     let title1 = easy_quick_create("th", null, "Utilisateur"),
         title2 = easy_quick_create("th", null, "Role"),
         title3 = easy_quick_create("th", null, "Toggle");
     easy_append_children(newtable, easy_quick_create("tr"));
     easy_append_children(newtable.firstChild, [title1, title2, title3]);
     return newtable;
+}
+
+function create_role_buttons_group() {
+
+    let group = easy_quick_create("div", "btn-group"),
+        btn1 = easy_quick_create("button", ["btn", "btn-primary"], "User"),
+        btn2 = easy_quick_create("button", ["btn", "btn-primary"], "Mod"),
+        btn3 = easy_quick_create("button", ["btn", "btn-primary"], "Admin");
+
+    btn1.addEventListener("click", (e) => {
+        //get user from parent
+        let parent = group.parentElement.parentElement;
+        let usermail = parent.firstChild.textContent;
+        let user_role = parent.children[1];
+        //change user to user role
+        change_user_role(usermail, "user");
+        //update table role section
+        user_role.textContent = get_user_role(usermail);
+    });
+
+    btn2.addEventListener("click", (e) => {
+        //get user from parent
+        let parent = group.parentElement.parentElement;
+        let usermail = parent.firstChild.textContent;
+        let user_role = parent.children[1];
+        //change user to mod role
+        change_user_role(usermail, "mod");
+        //update table role section
+        user_role.textContent = get_user_role(usermail);
+    });
+
+    btn3.addEventListener("click", (e) => {
+        //get user from parent
+        let parent = group.parentElement.parentElement;
+        let usermail = parent.firstChild.textContent;
+        let user_role = parent.children[1];
+        //change user to admin role
+        change_user_role(usermail, "admin");
+        //update table role section
+        user_role.textContent = get_user_role(usermail);
+    });
+
+    easy_append_children(group, [btn1, btn2, btn3]);
+
+    return group;
 }
