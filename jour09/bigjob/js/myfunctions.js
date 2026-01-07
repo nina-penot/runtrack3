@@ -256,11 +256,11 @@ function change_user_role(user, newrole) {
     localStorage.setItem("users", JSON.stringify(users));
 }
 
-function change_request_status(userid, newstatus) {
+function change_request_status(request_id, newstatus) {
     //search user from email
     const requests = JSON.parse(localStorage.getItem("requests"));
-    const myrequest = requests.find(u => u.user_id === userid);
-    const myrequ_index = requests.findIndex(u => u.user_id === userid);
+    const myrequest = requests.find(u => u.id == request_id);
+    const myrequ_index = requests.findIndex(u => u.id == request_id);
     //change this users role
     myrequest.status = newstatus;
     requests[myrequ_index] = myrequest;
@@ -271,6 +271,12 @@ function get_mail_from_id(userid) {
     const users = JSON.parse(localStorage.getItem("users"));
     const myuser = users.find(u => u.id === userid);
     return myuser.email;
+}
+
+function get_id_from_mail(email) {
+    const users = JSON.parse(localStorage.getItem("users"));
+    const myuser = users.find(u => u.email === email);
+    return myuser.id;
 }
 
 //------------------------------------------
@@ -385,35 +391,39 @@ function create_role_buttons_group() {
 
 function create_request_buttons_group() {
     let group = easy_quick_create("div", "btn-group"),
-        btn1 = easy_quick_create("button", ["btn", "btn-success"], "Accept"),
-        btn2 = easy_quick_create("button", ["btn", "btn-danger"], "Refuse");
+        btn1 = easy_quick_create("button", ["btn", "btn-success"], "Accepter"),
+        btn2 = easy_quick_create("button", ["btn", "btn-danger"], "Refuser");
 
     btn1.addEventListener("click", (e) => {
+        e.preventDefault();
         //get parent td
         let parent = group.parentElement;
+        let request_id = parent.parentElement.children[0].dataset.id;
         let status = parent.parentElement.children[2];
         console.log(status);
         //accept request
-        change_request_status(userid, "accepted");
+        change_request_status(request_id, "accepted");
         //replace content of parent td with "accepted"
         status.textContent = "acceptée";
         //remove the buttons
         parent.innerHTML = "";
-        parent.textContent = "-";
+        parent.textContent = "Décidé";
     });
 
     btn2.addEventListener("click", (e) => {
+        e.preventDefault();
         //get parent td
         let parent = group.parentElement;
+        let request_id = parent.parentElement.children[0].dataset.id;
         let status = parent.parentElement.children[2];
         console.log(status);
         //refuse request
-        change_request_status(userid, "refused");
+        change_request_status(request_id, "refused");
         //replace content of parent td with "accepted"
         status.textContent = "refusé";
         //remove the buttons
         parent.innerHTML = "";
-        parent.textContent = "-";
+        parent.textContent = "Décidé";
     });
 
     easy_append_children(group, [btn1, btn2]);

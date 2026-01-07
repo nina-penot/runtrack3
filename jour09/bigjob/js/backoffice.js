@@ -15,7 +15,7 @@ if (is_user_admin(user) || is_user_mod(user)) {
 
     const translate = {
         "pending": "en attente",
-        "approved": "accéptée",
+        "accepted": "accéptée",
         "refused": "refusée"
     };
 
@@ -26,7 +26,13 @@ if (is_user_admin(user) || is_user_mod(user)) {
             td3 = easy_quick_create("td", null, translate[requests[i].status]),
             td4 = easy_quick_create("td");
 
-        easy_append_children(td4, create_request_buttons_group());
+        td1.dataset.id = requests[i].id;
+        if (requests[i].status != "pending") {
+            td4.textContent = "Décidé";
+        } else {
+            easy_append_children(td4, create_request_buttons_group());
+        }
+
         easy_append_children(newtr, [td1, td2, td3, td4]);
         easy_append_children(request_table.tBodies[0], newtr);
     }
