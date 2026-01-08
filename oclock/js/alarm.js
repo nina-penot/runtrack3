@@ -14,11 +14,30 @@ if (load_alarms()) {
 }
 
 alarm_hour.addEventListener("input", (e) => {
-    alarm_hour.value = make_double_digit(alarm_hour.value)
+    if (alarm_hour.toString().length < 2) {
+        alarm_hour.value = make_double_digit(alarm_hour.value)
+    }
 });
 
 alarm_min.addEventListener("input", (e) => {
-    alarm_min.value = make_double_digit(alarm_min.value)
+    let allowed = ["1", "2", "3", "4", "5", "6", "7", "8", "9",
+        1, 2, 3, 4, 5, 6, 7, 8, 9];
+    if (!allowed.includes(e.data)) {
+        e.preventDefault();
+        console.log(":(")
+    } else {
+        if (alarm_min.toString().length < 2 && alarm_min.value != "") {
+            alarm_min.value = make_double_digit(alarm_min.value)
+        }
+        if (alarm_min.value > 59) {
+            alarm_min.value = 59;
+        }
+        if (alarm_min.value < 0) {
+            alarm_min.value = 0;
+        }
+    }
+
+    console.log(alarm_min.value);
 });
 
 button.addEventListener("click", (e) => {
@@ -29,12 +48,19 @@ button.addEventListener("click", (e) => {
     if (alarm_min.value == "") {
         alarm_min.value = "00";
     }
-    let myid = save_alarm(alarm_hour.value, alarm_min.value);
-    list_elem = create_alarm_elem(myid, alarm_hour.value, alarm_min.value);
-    //set it to activate at time and have a button to deactivate
-    //might need another event listener?
+    if (typeof Number(alarm_min.value) != "number" || typeof Number(alarm_hour.value) != "number") {
+        console.log("error: not a number");
+    } else {
+        let myid = save_alarm(alarm_hour.value, alarm_min.value);
+        list_elem = create_alarm_elem(myid, alarm_hour.value, alarm_min.value);
+        //set it to activate at time and have a button to deactivate
+        //might need another event listener?
 
-    //save input element in list
-    easy_append_children(alarm_list, list_elem);
-    //reset input to 00:00
+        //save input element in list
+        easy_append_children(alarm_list, list_elem);
+        //reset input to 00:00
+        alarm_hour.value = "";
+        alarm_min.value = "";
+    }
+
 })
