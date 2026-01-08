@@ -25,10 +25,17 @@ function get_remaining_time(hour, minute) {
     let h = today.getHours();
     let m = today.getMinutes();
 
-    let hour_diff = h < hour ? hour - h : (24 - h) + hour;
-    hour_diff = hour_diff >= 24 ? 0 : hour_diff;
-    let minute_diff = m < minute ? minute - m : (60 - m) + minute;
-    minute_diff = minute_diff >= 60 ? 0 : minute_diff;
+    //convert to minutes
+    let total_min = (hour * 60) + minute;
+    let total_min_now = (h * 60) + m;
+    let plus_one_day_first = (24 * 60) - total_min_now;
+    let plus_one_day_second = (24 * 60) - ((24 * 60) - total_min);
+
+    let total_diff = total_min < total_min_now ? plus_one_day_first + plus_one_day_second :
+        total_min - total_min_now;
+
+    let hour_diff = Math.floor(total_diff / 60);
+    let minute_diff = total_diff - (hour_diff * 60);
 
     let time_diff = {
         "hour": make_double_digit(hour_diff),
@@ -36,6 +43,26 @@ function get_remaining_time(hour, minute) {
     };
 
     return time_diff;
+}
+
+function get_remaining_seconds(hour, minute) {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+
+    //convert to minutes
+    let total_min = (hour * 60) + minute;
+    let total_min_now = (h * 60) + m;
+    let plus_one_day_first = (24 * 60) - total_min_now;
+    let plus_one_day_second = (24 * 60) - ((24 * 60) - total_min);
+
+    let total_diff = total_min < total_min_now ? plus_one_day_first + plus_one_day_second :
+        total_min - total_min_now;
+
+    let seconds = total_diff * 60;
+
+    console.log("func get_remaining_seconds: " + seconds);
+    return seconds;
 }
 
 //--------------------------------
@@ -72,17 +99,23 @@ function save_alarm(hours, minutes) {
     return newid;
 }
 
+function get_alarm_info(alarm_id) {
+    let myalarms = JSON.parse(localStorage.getItem("alarms"));
+    let target = myalarms.find(a => a.id == alarm_id);
+    return target;
+}
+
 function remove_alarm(alarm_id) {
     let myalarms = JSON.parse(localStorage.getItem("alarms"));
     let target = myalarms.find(a => a.id == alarm_id);
     let target_index = myalarms.indexOf(target);
     myalarms.splice(target_index, 1);
-    if (myalarms) {
+    console.log(myalarms);
+    if (myalarms.length > 0) {
         localStorage.setItem("alarms", JSON.stringify(myalarms));
     } else {
         localStorage.removeItem("alarms");
     }
-
 }
 
 function create_alarm_elem(alarm_id, hour, minute) {
@@ -93,15 +126,52 @@ function create_alarm_elem(alarm_id, hour, minute) {
     let alarm_time = easy_quick_create("div", "alarm_time", list_elem_text);
     let remaining = easy_quick_create("div", "alarm_time", rem_text);
     let remove_btn = easy_quick_create("button", ["btn", "btn-danger"], "Supprimer");
+    let its_time = easy_quick_create("div", "alarm_time", "C'EST L'HEURE!!");
     let disable_btn = easy_quick_create("button", ["btn", "btn-warning"], "Arrêter");
 
     alarm_cont.dataset.id = alarm_id;
 
+    easy_append_children(alarm_cont, [alarm_time, remaining, remove_btn]);
+
+    let myinterval = setInterval(() => {
+        let alarm_info = get_alarm_info(alarm_id);
+        let newtime = get_remaining_time(Number(alarm_info.hour),
+            Number(alarm_info.minute));
+        remaining.textContent = "L'alarme sonnera dans : " + newtime["hour"] + ":" +
+            newtime["minute"];
+    }, 1000);
+
+    let alarm_info = get_alarm_info(alarm_id);
+    let sec_rem = get_remaining_seconds(Number(alarm_info.hour), Number(alarm_info.minute));
+    let timeleft;
+    timeleft = setTimeout(() => {
+        easy_append_children(alarm_cont, [its_time, disable_btn]);
+    }, sec_rem);
+
     remove_btn.addEventListener("click", (e) => {
         alarm_cont.remove();
         remove_alarm(alarm_id);
+        clearInterval(myinterval);
+        clearTimeout(timeleft);
     })
 
-    easy_append_children(alarm_cont, [alarm_time, remaining, remove_btn]);
+    disable_btn.addEventListener("click", (e) => {
+        let alarm_info = get_alarm_info(alarm_id);
+        let sec_rem = get_remaining_seconds(Number(alarm_info.hour), Number(alarm_info.minute));
+        clearTimeout(timeleft);
+        if (sec_rem <= 0) {
+            timeleft = setTimeout(() => {
+                easy_append_children(alarm_cont, [its_time, disable_btn]);
+            }, 1000 * 60 * 60 * 24);
+        } else {
+            timeleft = setTimeout(() => {
+                easy_append_children(alarm_cont, [its_time, disable_btn]);
+            }, sec_rem);
+        }
+
+        its_time.remove();
+        disable_btn.remove();
+    })
+
     return alarm_cont;
 }
