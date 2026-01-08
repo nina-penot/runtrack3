@@ -18,3 +18,25 @@
 .secondary_color {
     background-color: var(--dark_second_color);
 }
+
+/* ALARM */
+
+.alarm_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.alarm {
+    display: flex;
+    float: left;
+    padding: 5px;
+    border-radius: 5px;
+    gap: 5px;
+}
+
+.alarm_time {
+    background-color: var(--dark_second_color);
+    color: var(--dark_accent_color);
+    padding: 5px;
+    border-radius: 5px;
+}

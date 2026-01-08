@@ -40,7 +40,13 @@
         </nav>
     </header>
     <main>
+        <div>
+            <input id="alarm_hour" type="number" min="0" max="23" placeholder="00">:
+            <input id="alarm_minutes" type="number" min="0" max="59" placeholder="00">
+            <button id="set_alarm" class="btn btn-warning">Enregistrer</button>
+        </div>
 
+        <div id="alarm_list" class="alarm_list"></div>
     </main>
     <footer></footer>
 
@@ -49,6 +55,7 @@
         crossorigin="anonymous"></script>
     <script src="js/useful_func/convenient_func.js"></script>
     <script src="js/useful_func/myfunctions.js"></script>
+    <script src="js/alarm.js"></script>
 </body>
 
 </html>
