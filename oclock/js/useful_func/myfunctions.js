@@ -110,7 +110,7 @@ function remove_alarm(alarm_id) {
     let target = myalarms.find(a => a.id == alarm_id);
     let target_index = myalarms.indexOf(target);
     myalarms.splice(target_index, 1);
-    console.log(myalarms);
+
     if (myalarms.length > 0) {
         localStorage.setItem("alarms", JSON.stringify(myalarms));
     } else {
@@ -144,9 +144,20 @@ function create_alarm_elem(alarm_id, hour, minute) {
     let alarm_info = get_alarm_info(alarm_id);
     let sec_rem = get_remaining_seconds(Number(alarm_info.hour), Number(alarm_info.minute));
     let timeleft;
-    timeleft = setTimeout(() => {
-        easy_append_children(alarm_cont, [its_time, disable_btn]);
-    }, sec_rem);
+
+    if (sec_rem == 60) {
+        let t = new Date();
+        t_s = t.getSeconds();
+        console.log("t_s = ", t_s);
+        timeleft = setTimeout(() => {
+            easy_append_children(alarm_cont, [its_time, disable_btn]);
+        }, 1000 * t_s);
+    } else {
+        timeleft = setTimeout(() => {
+            easy_append_children(alarm_cont, [its_time, disable_btn]);
+        }, sec_rem * 1000);
+    }
+
 
     remove_btn.addEventListener("click", (e) => {
         alarm_cont.remove();
@@ -166,7 +177,7 @@ function create_alarm_elem(alarm_id, hour, minute) {
         } else {
             timeleft = setTimeout(() => {
                 easy_append_children(alarm_cont, [its_time, disable_btn]);
-            }, sec_rem);
+            }, sec_rem * 1000);
         }
 
         its_time.remove();
