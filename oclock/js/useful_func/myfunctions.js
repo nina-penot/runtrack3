@@ -6,6 +6,38 @@ function make_double_digit(num) {
     }
 }
 
+//
+
+function check_if_time(hour, minute) {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+
+    if (hour == h && minute == m) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function get_remaining_time(hour, minute) {
+    const today = new Date();
+    let h = today.getHours();
+    let m = today.getMinutes();
+
+    let hour_diff = h < hour ? hour - h : (24 - h) + hour;
+    hour_diff = hour_diff >= 24 ? 0 : hour_diff;
+    let minute_diff = m < minute ? minute - m : (60 - m) + minute;
+    minute_diff = minute_diff >= 60 ? 0 : minute_diff;
+
+    let time_diff = {
+        "hour": make_double_digit(hour_diff),
+        "minute": make_double_digit(minute_diff)
+    };
+
+    return time_diff;
+}
+
 //--------------------------------
 // ALARM
 //--------------------------------
@@ -55,8 +87,11 @@ function remove_alarm(alarm_id) {
 
 function create_alarm_elem(alarm_id, hour, minute) {
     let list_elem_text = "Alarme sonnera à : " + hour + ":" + minute;
+    let rem_time = get_remaining_time(Number(hour), Number(minute));
+    let rem_text = "L'alarme sonnera dans : " + rem_time["hour"] + ":" + rem_time["minute"];
     let alarm_cont = easy_quick_create("div", "alarm");
     let alarm_time = easy_quick_create("div", "alarm_time", list_elem_text);
+    let remaining = easy_quick_create("div", "alarm_time", rem_text);
     let remove_btn = easy_quick_create("button", ["btn", "btn-danger"], "Supprimer");
     let disable_btn = easy_quick_create("button", ["btn", "btn-warning"], "Arrêter");
 
@@ -67,6 +102,6 @@ function create_alarm_elem(alarm_id, hour, minute) {
         remove_alarm(alarm_id);
     })
 
-    easy_append_children(alarm_cont, [alarm_time, remove_btn]);
+    easy_append_children(alarm_cont, [alarm_time, remaining, remove_btn]);
     return alarm_cont;
 }
