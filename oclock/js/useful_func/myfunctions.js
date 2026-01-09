@@ -6,6 +6,10 @@ function make_double_digit(num) {
     }
 }
 
+function get_now_in_seconds() {
+    return Math.floor((Date.now()) / 1000);
+}
+
 //
 
 function check_if_time(hour, minute) {
@@ -63,6 +67,14 @@ function get_remaining_seconds(hour, minute) {
 
     console.log("func get_remaining_seconds: " + seconds);
     return seconds;
+}
+
+function get_units_from_seconds(seconds) {
+    //
+}
+
+function convert_to_seconds(h, m, s) {
+    return s + (m * 60) + (h * 60 * 60);
 }
 
 //--------------------------------
@@ -194,9 +206,12 @@ function create_alarm_elem(alarm_id, hour, minute) {
 function save_timer(hours, minutes, seconds, starttime) {
     let newid = Date.now();
 
+    let endtime = convert_to_seconds(hours, minutes, seconds) + starttime;
+
     let myjson = {
         id: newid,
         start_time: starttime,
+        end_time: endtime,
         hour: hours,
         minute: minutes,
         second: seconds
@@ -236,6 +251,16 @@ function load_timers() {
     }
 }
 
+function get_timer_info(timer_id) {
+    let mytimers = JSON.parse(localStorage.getItem("timers"));
+    let target = mytimers.find(a => a.id == timer_id);
+    return target;
+}
+
+function timer_remaining_seconds(currenttime, starttime) {
+    return currenttime - starttime;
+}
+
 /**
  * Creates a timer element that will go down until 0
  * @param {*} id id of the timer
@@ -243,4 +268,54 @@ function load_timers() {
  * @param {*} m minutes
  * @param {*} s seconds
  */
-function create_timer_element(id, h, m, s) { }
+function create_timer_element(timer_id, starttime, h, m, s) {
+    //let rem_time_sec = timer_remaining_seconds(parseInt(h), parseInt(m), parseInt(s), starttime);
+    const timer_info = get_timer_info(timer_id);
+    let now_sec = get_now_in_seconds();
+    let time_now = timer_info.end_time - now_sec;
+    let elem_text;
+    if (time_now <= 0) {
+        elem_text = "00:00:00";
+    } else {
+        elem_text = new Date((s + (m * 60) + (h * 60 * 60)) * 1000).toISOString().slice(11, 19);
+    }
+
+
+    let timer_cont = easy_quick_create("div", "alarm");
+    let timer_time = easy_quick_create("div", "alarm_time", elem_text);
+    let remove_btn = easy_quick_create("button", ["btn", "btn-danger"], "Supprimer");
+    let its_time = easy_quick_create("div", "alarm_time", "Terminé!");
+    // let disable_btn = easy_quick_create("button", ["btn", "btn-warning"], "Arrêter");
+    timer_cont.dataset.id = timer_id;
+
+    easy_append_children(timer_cont, [timer_time, remove_btn]);
+
+    let myinterval = setInterval(() => {
+        //timer_info = get_timer_info(timer_id);
+        let newtime = timer_info.end_time - get_now_in_seconds();
+        if (newtime < 0) {
+            clearInterval(myinterval);
+            easy_append_children(timer_cont, its_time);
+        } else {
+            //console.log(newtime);
+            timer_time.textContent = new Date(newtime * 1000).toISOString().slice(11, 19);
+        }
+        // let current_time = Math.floor((Date.now()) / 1000);
+        // let newtime = timer_remaining_seconds(current_time, timer_info.start_time);
+        // console.log(newtime);
+
+    }, 1000);
+
+    // let timeleft = setTimeout(() => {
+    //     clearInterval(myinterval);
+    // }, get_now_in_seconds() - timer_info.end_time);
+
+    remove_btn.addEventListener("click", (e) => {
+        timer_cont.remove();
+        remove_timer(timer_id);
+        clearInterval(myinterval);
+        // clearTimeout(timeleft);
+    })
+
+    return timer_cont;
+}

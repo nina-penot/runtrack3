@@ -3,7 +3,18 @@ const my_inp_groups = easy_class_get("timer_group");
 
 const start_btn = easy_id_get("start_btn");
 
+const timer_list = easy_id_get("timer_list");
 //let test = easy_find_child(my_inp_groups[1], "button");
+
+if (load_timers()) {
+    let saved_timers = load_timers();
+    for (i = 0; i < saved_timers.length; i++) {
+        //make a timer element appear in list
+        let list_elem = create_timer_element(saved_timers[i].id, saved_timers[i].start_time,
+            saved_timers[i].hour, saved_timers[i].minute, saved_timers[i].second);
+        easy_append_children(timer_list, list_elem);
+    }
+}
 
 //Setup buttons for each input and makes them accept only numbers
 for (i = 0; i < my_inp_groups.length; i++) {
@@ -111,18 +122,28 @@ for (i = 0; i < my_inp_groups.length; i++) {
 
 start_btn.addEventListener("click", (e) => {
     //get the values
+    for (e in myinputs) {
+        if (myinputs[e].value == "") {
+            myinputs[e].value = 0;
+        }
+    }
+
     const inp_values = {
         hour: parseInt(myinputs[0].value),
         minute: parseInt(myinputs[1].value),
         second: parseInt(myinputs[2].value)
     }
-    let starttime = (Date.now()) / 1000;
-    //create a result element
-    let id_value = save_timer(inp_values.hour, inp_values.minute, inp_values.second, starttime);
-    //have a delete button next to it
-    const del_btn = easy_quick_create("button", ["btn btn-danger"], "Supprimer");
+    let starttime = Math.floor((Date.now()) / 1000);
     //save it to localstorage
+    let id_value = save_timer(inp_values.hour, inp_values.minute, inp_values.second, starttime);
+    console.log(localStorage);
+    //create a timer element
+    let timer_elem = create_timer_element(id_value, starttime,
+        inp_values.hour, inp_values.minute, inp_values.second);
+    //
+
     //append the result element to body
+    easy_append_children(timer_list, timer_elem);
     //add an interval every seconds decrementing time
     //when reaches 0, delete interval
     //might need timeout instead? for page change
