@@ -5,6 +5,7 @@ const start_btn = easy_id_get("start_btn");
 
 //let test = easy_find_child(my_inp_groups[1], "button");
 
+//Setup buttons for each input and makes them accept only numbers
 for (i = 0; i < my_inp_groups.length; i++) {
 
     //get buttons
@@ -17,6 +18,15 @@ for (i = 0; i < my_inp_groups.length; i++) {
     let target_input = easy_find_child(my_inp_groups[i], "input", 0);
 
     target_input.addEventListener("input", (e) => {
+
+        if (!parseInt(e.data) && e.data != null && e.data != 0) {
+            console.log(e.data)
+            let index = target_input.value.indexOf(e.data);
+            console.log(index)
+            let test = target_input.value.slice(0, index) + target_input.value.slice(index + 1);
+            target_input.value = test;
+        }
+
         if (parseInt(target_input.value) > target_input.max) {
             target_input.value = target_input.max;
         }
@@ -54,7 +64,6 @@ for (i = 0; i < my_inp_groups.length; i++) {
     up_btn.addEventListener("click", increment_time)
 
     up_btn.addEventListener("mousedown", (e) => {
-        console.log(e)
 
         let timeout, interval;
 
@@ -78,7 +87,6 @@ for (i = 0; i < my_inp_groups.length; i++) {
     down_btn.addEventListener("click", decrement_time);
 
     down_btn.addEventListener("mousedown", (e) => {
-        console.log(e)
 
         let timeout, interval;
 
