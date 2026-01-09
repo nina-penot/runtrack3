@@ -40,7 +40,38 @@
         </nav>
     </header>
     <main>
-
+        <div class="timer_cont" id="timer_setup">
+            <div class="timer_group">
+                <button class="btn btn-warning">↑</button>
+                <span class="input-group">
+                    <input class="timer_input" id="timer_hour" type="text" min="0" max="23" minlength="1" maxlength="2"
+                        placeholder="00">
+                    <span class="input-group-text">h</span>
+                </span>
+                <button class="btn btn-warning">↓</button>
+            </div>
+            <div style="align-self: center;">:</div>
+            <div class="timer_group">
+                <button class="btn btn-warning">↑</button>
+                <span class="input-group">
+                    <input class="timer_input" id="timer_min" type="text" min="0" max="59" minlength="1" maxlength="2"
+                        placeholder="00">
+                    <span class="input-group-text">m</span>
+                </span>
+                <button class="btn btn-warning">↓</button>
+            </div>
+            <div style="align-self: center;">:</div>
+            <div class="timer_group">
+                <button class="btn btn-warning">↑</button>
+                <span class="input-group">
+                    <input class="timer_input" id="timer_sec" type="text" min="0" max="59" minlength="1" maxlength="2"
+                        placeholder="00">
+                    <span class="input-group-text">s</span>
+                </span>
+                <button class="btn btn-warning">↓</button>
+            </div>
+        </div>
+        <button class="btn btn-warning">Démarrer</button>
     </main>
     <footer></footer>
 
@@ -49,6 +80,7 @@
         crossorigin="anonymous"></script>
     <script src="js/useful_func/convenient_func.js"></script>
     <script src="js/useful_func/myfunctions.js"></script>
+    <script src="js/timer.js"></script>
 </body>
 
 </html>
