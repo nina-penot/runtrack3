@@ -319,3 +319,25 @@ function create_timer_element(timer_id, starttime, h, m, s) {
 
     return timer_cont;
 }
+
+//
+
+// function save_chrono() {
+//     let newid = Date.now();
+
+//     let myjson = {
+//         id: newid,
+//         start_time: newid
+//     };
+
+//     if (!localStorage.getItem("timers")) {
+//         myjson = [myjson];
+//         localStorage.setItem("timers", JSON.stringify(myjson));
+//     } else {
+//         let timers = JSON.parse(localStorage.getItem("timers"));
+//         timers.push(myjson);
+//         localStorage.setItem("timers", JSON.stringify(timers));
+//     }
+
+//     return newid;
+// }
