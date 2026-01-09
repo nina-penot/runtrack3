@@ -186,3 +186,61 @@ function create_alarm_elem(alarm_id, hour, minute) {
 
     return alarm_cont;
 }
+
+//--------------------------------
+// TIMER
+//--------------------------------
+
+function save_timer(hours, minutes, seconds, starttime) {
+    let newid = Date.now();
+
+    let myjson = {
+        id: newid,
+        start_time: starttime,
+        hour: hours,
+        minute: minutes,
+        second: seconds
+    };
+
+    if (!localStorage.getItem("timers")) {
+        myjson = [myjson];
+        localStorage.setItem("timers", JSON.stringify(myjson));
+    } else {
+        let timers = JSON.parse(localStorage.getItem("timers"));
+        timers.push(myjson);
+        localStorage.setItem("timers", JSON.stringify(timers));
+    }
+
+    return newid;
+}
+
+function remove_timer(timer_id) {
+    let mytimers = JSON.parse(localStorage.getItem("timers"));
+    let target = mytimers.find(a => a.id == timer_id);
+    let target_index = mytimers.indexOf(target);
+    mytimers.splice(target_index, 1);
+
+    if (mytimers.length > 0) {
+        localStorage.setItem("timers", JSON.stringify(mytimers));
+    } else {
+        localStorage.removeItem("timers");
+    }
+}
+
+function load_timers() {
+    if (localStorage.getItem("timers")) {
+        let timers = JSON.parse(localStorage.getItem("timers"));
+        return timers;
+    } else {
+        return null;
+    }
+}
+
+/**
+ * Creates a timer element that will go down until 0
+ * @param {*} id id of the timer
+ * @param {*} h hours
+ * @param {*} m minutes
+ * @param {*} s seconds
+ */
+function create_timer_element(id, h, m, s) { }

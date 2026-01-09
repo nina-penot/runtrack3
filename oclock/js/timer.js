@@ -106,3 +106,24 @@ for (i = 0; i < my_inp_groups.length; i++) {
 
     });
 }
+
+//Setup start button
+
+start_btn.addEventListener("click", (e) => {
+    //get the values
+    const inp_values = {
+        hour: parseInt(myinputs[0].value),
+        minute: parseInt(myinputs[1].value),
+        second: parseInt(myinputs[2].value)
+    }
+    let starttime = (Date.now()) / 1000;
+    //create a result element
+    let id_value = save_timer(inp_values.hour, inp_values.minute, inp_values.second, starttime);
+    //have a delete button next to it
+    const del_btn = easy_quick_create("button", ["btn btn-danger"], "Supprimer");
+    //save it to localstorage
+    //append the result element to body
+    //add an interval every seconds decrementing time
+    //when reaches 0, delete interval
+    //might need timeout instead? for page change
+});
