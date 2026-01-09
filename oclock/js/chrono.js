@@ -17,6 +17,7 @@ start_btn.addEventListener("click", (e) => {
     let now = Date.now();
 
     if (pressed) {
+        start_btn.textContent = "Stop";
         myinterval = setInterval(() => {
             mytime = Date.now() - now + saved_time;
             thistime = new Date(Date.now() - now + saved_time).toISOString().slice(11, 22);
@@ -25,6 +26,7 @@ start_btn.addEventListener("click", (e) => {
     } else {
         clearInterval(myinterval);
         saved_time = mytime;
+        start_btn.textContent = "Start";
     }
 
 });
