@@ -14,5 +14,7 @@ function get_time() {
     //setTimeout(get_time, 1000);
 }
 
+get_time()
+
 setInterval(get_time, 1000);
 //get_time();
