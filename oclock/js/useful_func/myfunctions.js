@@ -151,7 +151,7 @@ function create_alarm_elem(alarm_id, hour, minute) {
             Number(alarm_info.minute));
         remaining.textContent = "L'alarme sonnera dans : " + newtime["hour"] + ":" +
             newtime["minute"];
-    }, 1000);
+    }, 100);
 
     let alarm_info = get_alarm_info(alarm_id);
     let sec_rem = get_remaining_seconds(Number(alarm_info.hour), Number(alarm_info.minute));
