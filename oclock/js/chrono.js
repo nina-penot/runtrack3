@@ -35,6 +35,8 @@ reset_btn.addEventListener("click", (e) => {
     //put chrono to 0
     clearInterval(myinterval);
     chrono.textContent = new Date(0).toISOString().slice(11, 22);
+    pressed = false;
+    start_btn.textContent = "Start";
 });
 
 save_btn.addEventListener("click", (e) => {
