@@ -17,45 +17,39 @@ if (load_alarms()) {
 }
 
 alarm_hour.addEventListener("input", (e) => {
-    if (!allowed.includes(e.data) && e.data != null && Number(e.data) < 10) {
-        e.preventDefault();
-        alarm_hour.value -= alarm_hour[-1];
-    } else {
-        if (alarm_hour.toString().length < 2 && alarm_hour.value != "") {
-            alarm_hour.value = make_double_digit(alarm_hour.value)
-        }
-        if (alarm_hour.value > 23) {
-            alarm_hour.value = 23;
-        }
-        if (alarm_hour.value < 0) {
-            alarm_hour.value = 0;
-        }
+
+    if (!parseInt(e.data) && e.data != null && e.data != 0) {
+        console.log(e.data)
+        let index = alarm_hour.value.indexOf(e.data);
+        console.log(index)
+        let test = alarm_hour.value.slice(0, index) + alarm_hour.value.slice(index + 1);
+        alarm_hour.value = test;
     }
+
+    if (parseInt(alarm_hour.value) > alarm_hour.max) {
+        alarm_hour.value = alarm_hour.max;
+    }
+    if (parseInt(alarm_hour.value) < alarm_hour.min) {
+        alarm_hour.value = alarm_hour.min;
+    }
+
 });
 
 alarm_min.addEventListener("input", (e) => {
 
-    // console.log(alarm_min.value);
-    console.log(e.data);
-    if (!allowed.includes(e.data) && e.data != null && Number(e.data) < 10) {
-        // e.preventDefault();
-        // console.log(alarm_min.value)
-        console.log(alarm_min.value);
-        let test = alarm_min.value.substring(0, alarm_min.value.length - 1);
+    if (!parseInt(e.data) && e.data != null && e.data != 0) {
+        console.log(e.data)
+        let index = alarm_min.value.indexOf(e.data);
+        console.log(index)
+        let test = alarm_min.value.slice(0, index) + alarm_min.value.slice(index + 1);
         alarm_min.value = test;
+    }
 
-        console.log(alarm_min.value + " " + test)
-    } else {
-        // if (alarm_min.value.toString().length < 2 && alarm_min.value != "") {
-        //     console.log("len < 2")
-        //     alarm_min.value = make_double_digit(alarm_min.value)
-        // }
-        if (alarm_min.value > 59) {
-            alarm_min.value = 59;
-        }
-        if (alarm_min.value < 0) {
-            alarm_min.value = 0;
-        }
+    if (parseInt(alarm_min.value) > alarm_min.max) {
+        alarm_min.value = alarm_min.max;
+    }
+    if (parseInt(alarm_min.value) < alarm_min.min) {
+        alarm_min.value = alarm_min.min;
     }
 
 });
